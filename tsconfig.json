@@ -1,0 +1,26 @@
+{
+	"ts-node": { "files": true },
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"allowJs": false,
+		"allowSyntheticDefaultImports": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"resolveJsonModule": true,
+		"declaration": true,
+		"outDir": "dist",
+		"lib": ["es7", "dom"],
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
+		"composite": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "./src",
+		"typeRoots": ["./src/types"],
+		"types": ["@types/jest", "jest"]
+	},
+	"include": ["src/**/*", "package.json", "__tests__"]
+}

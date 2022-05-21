@@ -1,0 +1,42 @@
+{
+	"name": "whatsapp-business",
+	"version": "1.0.0",
+	"description": "This is the common configuration for node js project with typescript I always do",
+	"main": "index.js",
+	"private": true,
+	"scripts": {
+		"build": "tsc",
+		"prepare": "husky install",
+		"test": "jest",
+		"cm": "cz"
+	},
+	"dependencies": {
+		"axios": "^0.27.2"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.0.0",
+		"@commitlint/config-conventional": "^17.0.0",
+		"@types/jest": "^27.5.1",
+		"@typescript-eslint/eslint-plugin": "^5.25.0",
+		"@typescript-eslint/parser": "^5.25.0",
+		"commitizen": "^4.2.4",
+		"cz-conventional-changelog": "3.3.0",
+		"devmoji": "^2.3.0",
+		"eslint": "^8.16.0",
+		"eslint-plugin-import": "^2.26.0",
+		"husky": "^8.0.1",
+		"jest": "^28.1.0",
+		"lint-staged": "^12.4.1",
+		"prettier": "^2.6.2",
+		"semantic-release": "^19.0.2",
+		"ts-jest": "^28.0.2",
+		"typescript": "^4.6.4"
+	},
+	"author": "myself",
+	"license": "ISC",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
+}
