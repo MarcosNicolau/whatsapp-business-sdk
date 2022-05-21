@@ -5,7 +5,9 @@ import {
 	UpdateBusinessProfilePayload,
 	BusinessProfileFields,
 } from "./types/business";
+import { GetMediaResponse, UploadMediaPayload, UploadMediaResponse } from "./types/media";
 import { createRestClient } from "./utils/restClient";
+import fs from "fs";
 
 interface WABAClientArgs {
 	apiToken: string;
@@ -50,5 +52,39 @@ export class WABAClient {
 				messaging_product: "whatsapp",
 			}
 		);
+	}
+	/*
+	 *
+	 * MEDIA ENDPOINTS
+	 *
+	 */
+	uploadMedia(payload: Omit<UploadMediaPayload, "messaging_product">) {
+		return this.restClient.post<UploadMediaResponse, UploadMediaPayload>(
+			`/${this.phoneId}/media`,
+			{
+				...payload,
+				messaging_product: "whatsapp",
+			}
+		);
+	}
+
+	getMedia(id: string) {
+		return this.restClient.get<GetMediaResponse>(`/${this.phoneId}/${id}`);
+	}
+	deleteMedia(id: string) {
+		this.restClient.delete<DefaultResponse>(`/${this.phoneId}/${id}`);
+	}
+	/**
+	 *
+	 * @param url your media’s URL
+	 * @param pathToSaveFile the path where you want to store the media
+	 */
+	async downloadMedia(url: string, pathToSaveFile: string) {
+		const response = await this.restClient.get(
+			"",
+			{},
+			{ baseURL: url, responseType: "stream" }
+		);
+		return response.pipe(fs.createWriteStream(pathToSaveFile));
 	}
 }
