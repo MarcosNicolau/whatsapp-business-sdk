@@ -8,6 +8,7 @@ import {
 import { GetMediaResponse, UploadMediaPayload, UploadMediaResponse } from "./types/media";
 import { createRestClient } from "./utils/restClient";
 import fs from "fs";
+import { Message, SendMessageResponse } from "types/messages";
 
 interface WABAClientArgs {
 	apiToken: string;
@@ -86,5 +87,20 @@ export class WABAClient {
 			{ baseURL: url, responseType: "stream" }
 		);
 		return response.pipe(fs.createWriteStream(pathToSaveFile));
+	}
+	/*
+	 *
+	 * MESSAGES ENDPOINTS
+	 *
+	 */
+
+	/**
+	 * I suggest checking https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages to get some examples and understand how this endpoints works
+	 */
+	async sendMessage(payload: Omit<Message, "messaging_product">) {
+		return this.restClient.post<SendMessageResponse, Message>(`/${this.phoneId}/messages`, {
+			...payload,
+			messaging_product: "whatsapp",
+		});
 	}
 }
