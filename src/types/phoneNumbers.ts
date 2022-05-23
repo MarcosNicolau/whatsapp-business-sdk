@@ -16,3 +16,12 @@ export type RequestPhoneNumberVerificationCodePayload = {
 	 */
 	locale: string;
 };
+
+export type RequestPhoneNumberVerificationCodeArgs = RequestPhoneNumberVerificationCodePayload & {
+	phoneNumberId: string;
+};
+
+export type VerifyPhoneNumberArgs = {
+	phoneNumberId: string;
+	code: string;
+};

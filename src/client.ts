@@ -2,8 +2,15 @@ import fs from "fs";
 import { Message, SendMessageResponse } from "types/messages";
 import {
 	GetBusinessPhoneNumberResponse,
+	RequestPhoneNumberVerificationCodeArgs,
 	RequestPhoneNumberVerificationCodePayload,
+	VerifyPhoneNumberArgs,
 } from "types/phoneNumbers";
+import {
+	RegisterPhoneArgs,
+	RegisterPhonePayload,
+	SetUpTwoFactorAuthArgs,
+} from "types/registration";
 import { DefaultResponse } from "types/response";
 import {
 	BusinessProfile,
@@ -138,21 +145,25 @@ export class WABAClient {
 	async requestPhoneNumberVerificationCode({
 		phoneNumberId,
 		...payload
-	}: RequestPhoneNumberVerificationCodePayload & {
-		phoneNumberId: string;
-	}) {
+	}: RequestPhoneNumberVerificationCodeArgs) {
 		return this.restClient.post<DefaultResponse, RequestPhoneNumberVerificationCodePayload>(
 			`/${phoneNumberId}/request_code`,
 			payload
 		);
 	}
-	async verifyPhoneNumberCode({
-		phoneNumberId,
-		...payload
-	}: {
-		phoneNumberId: string;
-		code: string;
-	}) {
+	async verifyPhoneNumberCode({ phoneNumberId, ...payload }: VerifyPhoneNumberArgs) {
 		return this.restClient.post<DefaultResponse>(`/${phoneNumberId}/verify_code`, payload);
+	}
+	async registerPhone({ phoneNumberId, ...payload }: RegisterPhoneArgs) {
+		return this.restClient.post<DefaultResponse, RegisterPhonePayload>(
+			`/${phoneNumberId}/register`,
+			{ messaging_product: "whatsapp", ...payload }
+		);
+	}
+	async deregisterPhone(phoneNumber: string) {
+		return this.restClient.post<DefaultResponse>(`/${phoneNumber}/deregister`);
+	}
+	async setupTwoStepAuth({ phoneNumberId, ...payload }: SetUpTwoFactorAuthArgs) {
+		return this.restClient.post<DefaultResponse>(`/${phoneNumberId}`, payload);
 	}
 }
