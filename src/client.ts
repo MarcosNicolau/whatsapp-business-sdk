@@ -1,6 +1,9 @@
-import { MarkMessageAsReadPayload } from "./types/messages";
 import fs from "fs";
 import { Message, SendMessageResponse } from "types/messages";
+import {
+	GetBusinessPhoneNumberResponse,
+	RequestPhoneNumberVerificationCodePayload,
+} from "types/phoneNumbers";
 import { DefaultResponse } from "types/response";
 import {
 	BusinessProfile,
@@ -9,21 +12,26 @@ import {
 	UpdateBusinessProfilePayload,
 } from "./types/business";
 import { GetMediaResponse, UploadMediaPayload, UploadMediaResponse } from "./types/media";
+import { MarkMessageAsReadPayload } from "./types/messages";
+import { BusinessPhoneNumber } from "./types/phoneNumbers";
 import { createRestClient } from "./utils/restClient";
 
 interface WABAClientArgs {
 	apiToken: string;
 	phoneId: string;
+	accountId: string;
 }
 
 export class WABAClient {
 	private apiToken: string;
 	restClient: ReturnType<typeof createRestClient>;
 	phoneId: string;
+	accountId: string;
 
-	constructor({ apiToken, phoneId }: WABAClientArgs) {
+	constructor({ apiToken, phoneId, accountId }: WABAClientArgs) {
 		this.apiToken = apiToken;
 		this.phoneId = phoneId;
+		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
 			baseURL: "https://graph.facebook.com/v13.0",
@@ -119,4 +127,32 @@ export class WABAClient {
 	 *	PHONE NUMBERS ENDPOINTS
 	 *
 	 */
+	async getBusinessPhoneNumbers() {
+		return this.restClient.get<GetBusinessPhoneNumberResponse>(
+			`/${this.accountId}/phone_numbers`
+		);
+	}
+	async getSingleBusinessPhoneNumber(phoneNumberId: string) {
+		return this.restClient.get<BusinessPhoneNumber>(`/${this.accountId}/${phoneNumberId}`);
+	}
+	async requestPhoneNumberVerificationCode({
+		phoneNumberId,
+		...payload
+	}: RequestPhoneNumberVerificationCodePayload & {
+		phoneNumberId: string;
+	}) {
+		return this.restClient.post<DefaultResponse, RequestPhoneNumberVerificationCodePayload>(
+			`/${phoneNumberId}/request_code`,
+			payload
+		);
+	}
+	async verifyPhoneNumberCode({
+		phoneNumberId,
+		...payload
+	}: {
+		phoneNumberId: string;
+		code: string;
+	}) {
+		return this.restClient.post<DefaultResponse>(`/${phoneNumberId}/verify_code`, payload);
+	}
 }
