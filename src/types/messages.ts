@@ -18,6 +18,12 @@ export type SendMessageResponse = {
 	];
 };
 
+export type MarkMessageAsReadPayload = {
+	messaging_product: "whatsapp";
+	status: "read";
+	message_id: string;
+};
+
 export type Message = {
 	/**
 	 * Defaults to text

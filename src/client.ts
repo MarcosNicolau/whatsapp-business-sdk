@@ -1,14 +1,15 @@
+import { MarkMessageAsReadPayload } from "./types/messages";
+import fs from "fs";
+import { Message, SendMessageResponse } from "types/messages";
 import { DefaultResponse } from "types/response";
 import {
 	BusinessProfile,
+	BusinessProfileFields,
 	BusinessProfileFieldsQuery,
 	UpdateBusinessProfilePayload,
-	BusinessProfileFields,
 } from "./types/business";
 import { GetMediaResponse, UploadMediaPayload, UploadMediaResponse } from "./types/media";
 import { createRestClient } from "./utils/restClient";
-import fs from "fs";
-import { Message, SendMessageResponse } from "types/messages";
 
 interface WABAClientArgs {
 	apiToken: string;
@@ -103,4 +104,19 @@ export class WABAClient {
 			messaging_product: "whatsapp",
 		});
 	}
+	async markMessageAsRead(message_id: string) {
+		return this.restClient.post<DefaultResponse, MarkMessageAsReadPayload>(
+			`/${this.phoneId}/messages`,
+			{
+				messaging_product: "whatsapp",
+				status: "read",
+				message_id,
+			}
+		);
+	}
+	/*
+	 *
+	 *	PHONE NUMBERS ENDPOINTS
+	 *
+	 */
 }
