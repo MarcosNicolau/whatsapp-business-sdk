@@ -12,6 +12,7 @@ import {
 	SetUpTwoFactorAuthArgs,
 } from "types/registration";
 import { DefaultResponse } from "types/response";
+import { WABAErrorHandler } from "utils/errorHandler";
 import {
 	BusinessProfile,
 	BusinessProfileFields,
@@ -42,6 +43,7 @@ export class WABAClient {
 		this.restClient = createRestClient({
 			apiToken,
 			baseURL: "https://graph.facebook.com/v13.0",
+			errorHandler: WABAErrorHandler,
 		});
 	}
 

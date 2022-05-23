@@ -3,25 +3,20 @@ import axios, { AxiosRequestConfig } from "axios";
 interface RestClientParams {
 	baseURL?: string;
 	apiToken?: string;
+	errorHandler?: (error: any) => any;
 }
 
-export class BaseRestClient {
-	private apiToken?: string;
-	baseUrl?: string;
-
-	constructor({ apiToken, baseUrl }: BaseRestClient) {
-		this.baseUrl = baseUrl;
-		this.apiToken = apiToken;
-	}
-}
-
-export const createRestClient = ({ baseURL, apiToken }: RestClientParams) => {
+export const createRestClient = ({ baseURL, apiToken, errorHandler }: RestClientParams) => {
 	const fetch = axios.create({
 		headers: {
 			authorization: `Bearer ${apiToken}`,
 		},
 		baseURL,
 	});
+	fetch.interceptors.response.use(
+		(response) => response,
+		async (error) => errorHandler && errorHandler(error)
+	);
 
 	return {
 		get: async <Response = any, Params = Record<string, string>>(
