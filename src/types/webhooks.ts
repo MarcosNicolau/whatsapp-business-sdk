@@ -1,6 +1,6 @@
 import { WABAErrorCodes } from "./error";
-import { LiteralUnion } from "types/utils";
-import { MessageType } from "types/messages";
+import { LiteralUnion } from "./utils";
+import { MessageType } from "./messages";
 
 export type WebhookContact = {
 	/**

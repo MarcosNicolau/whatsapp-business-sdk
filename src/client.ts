@@ -1,27 +1,26 @@
 import fs from "fs";
-import { Message, SendMessageResponse } from "types/messages";
 import {
+	Message,
+	SendMessageResponse,
 	GetBusinessPhoneNumberResponse,
 	RequestPhoneNumberVerificationCodeArgs,
 	RequestPhoneNumberVerificationCodePayload,
 	VerifyPhoneNumberArgs,
-} from "types/phoneNumbers";
-import {
 	RegisterPhoneArgs,
 	RegisterPhonePayload,
 	SetUpTwoFactorAuthArgs,
-} from "types/registration";
-import { DefaultResponse } from "types/response";
-import { WABAErrorHandler } from "utils/errorHandler";
-import {
+	DefaultResponse,
 	BusinessProfile,
 	BusinessProfileFields,
 	BusinessProfileFieldsQuery,
 	UpdateBusinessProfilePayload,
-} from "./types/business";
-import { GetMediaResponse, UploadMediaPayload, UploadMediaResponse } from "./types/media";
-import { MarkMessageAsReadPayload } from "./types/messages";
-import { BusinessPhoneNumber } from "./types/phoneNumbers";
+	GetMediaResponse,
+	UploadMediaPayload,
+	UploadMediaResponse,
+	MarkMessageAsReadPayload,
+	BusinessPhoneNumber,
+} from "./types";
+import { WABAErrorHandler } from "./utils/errorHandler";
 import { createRestClient } from "./utils/restClient";
 
 interface WABAClientArgs {
