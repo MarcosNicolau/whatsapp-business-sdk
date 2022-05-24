@@ -42,7 +42,7 @@ export class WABAClient {
 		this.restClient = createRestClient({
 			apiToken,
 			baseURL: "https://graph.facebook.com/v13.0",
-			errorHandler: WABAErrorHandler,
+			errorHandler: (error) => WABAErrorHandler(error?.response?.data),
 		});
 	}
 
@@ -56,7 +56,7 @@ export class WABAClient {
 	 * @param fields you can specify what you want to know from your business. If not passed, defaults to all fields
 	 */
 	getBusinessProfile(fields?: BusinessProfileFieldsQuery) {
-		return this.restClient.get<BusinessProfile>(`/${this.phoneId}/whatsapp_business_profile`, {
+		return this.restClient.get<BusinessProfile>(`${this.phoneId}/whatsapp_business_profile`, {
 			fields:
 				fields?.join(",") ||
 				"about,address,description,email,profile_picture_url,websites,vertical",
@@ -64,7 +64,7 @@ export class WABAClient {
 	}
 	updateBusinessProfile(payload: UpdateBusinessProfilePayload) {
 		return this.restClient.post<DefaultResponse, Partial<BusinessProfileFields>>(
-			`/${this.phoneId}/whatsapp_business_profile`,
+			`${this.phoneId}/whatsapp_business_profile`,
 			{
 				...payload,
 				messaging_product: "whatsapp",
@@ -78,7 +78,7 @@ export class WABAClient {
 	 */
 	uploadMedia(payload: Omit<UploadMediaPayload, "messaging_product">) {
 		return this.restClient.post<UploadMediaResponse, UploadMediaPayload>(
-			`/${this.phoneId}/media`,
+			`${this.phoneId}/media`,
 			{
 				...payload,
 				messaging_product: "whatsapp",
@@ -87,10 +87,10 @@ export class WABAClient {
 	}
 
 	getMedia(id: string) {
-		return this.restClient.get<GetMediaResponse>(`/${this.phoneId}/${id}`);
+		return this.restClient.get<GetMediaResponse>(`${this.phoneId}/${id}`);
 	}
 	deleteMedia(id: string) {
-		this.restClient.delete<DefaultResponse>(`/${this.phoneId}/${id}`);
+		this.restClient.delete<DefaultResponse>(`${this.phoneId}/${id}`);
 	}
 	/**
 	 *
@@ -115,14 +115,14 @@ export class WABAClient {
 	 * I suggest checking https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages to get some examples and understand how this endpoints works
 	 */
 	async sendMessage(payload: Omit<Message, "messaging_product">) {
-		return this.restClient.post<SendMessageResponse, Message>(`/${this.phoneId}/messages`, {
+		return this.restClient.post<SendMessageResponse, Message>(`${this.phoneId}/messages`, {
 			...payload,
 			messaging_product: "whatsapp",
 		});
 	}
 	async markMessageAsRead(message_id: string) {
 		return this.restClient.post<DefaultResponse, MarkMessageAsReadPayload>(
-			`/${this.phoneId}/messages`,
+			`${this.phoneId}/messages`,
 			{
 				messaging_product: "whatsapp",
 				status: "read",
@@ -137,7 +137,7 @@ export class WABAClient {
 	 */
 	async getBusinessPhoneNumbers() {
 		return this.restClient.get<GetBusinessPhoneNumberResponse>(
-			`/${this.accountId}/phone_numbers`
+			`${this.accountId}/phone_numbers`
 		);
 	}
 	async getSingleBusinessPhoneNumber(phoneNumberId: string) {
@@ -148,7 +148,7 @@ export class WABAClient {
 		...payload
 	}: RequestPhoneNumberVerificationCodeArgs) {
 		return this.restClient.post<DefaultResponse, RequestPhoneNumberVerificationCodePayload>(
-			`/${phoneNumberId}/request_code`,
+			`${phoneNumberId}/request_code`,
 			payload
 		);
 	}
@@ -157,14 +157,14 @@ export class WABAClient {
 	}
 	async registerPhone({ phoneNumberId, ...payload }: RegisterPhoneArgs) {
 		return this.restClient.post<DefaultResponse, RegisterPhonePayload>(
-			`/${phoneNumberId}/register`,
+			`${phoneNumberId}/register`,
 			{ messaging_product: "whatsapp", ...payload }
 		);
 	}
 	async deregisterPhone(phoneNumber: string) {
-		return this.restClient.post<DefaultResponse>(`/${phoneNumber}/deregister`);
+		return this.restClient.post<DefaultResponse>(`${phoneNumber}/deregister`);
 	}
 	async setupTwoStepAuth({ phoneNumberId, ...payload }: SetUpTwoFactorAuthArgs) {
-		return this.restClient.post<DefaultResponse>(`/${phoneNumberId}`, payload);
+		return this.restClient.post<DefaultResponse>(`${phoneNumberId}`, payload);
 	}
 }
