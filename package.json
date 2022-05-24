@@ -14,6 +14,10 @@
 	"files": [
 		"dist"
 	],
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"tag": "latest"
+	},
 	"scripts": {
 		"build": "tsc",
 		"prepare": "tsc --build",
@@ -26,6 +30,8 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-conventional": "^17.0.0",
+		"@semantic-release/changelog": "^6.0.1",
+		"@semantic-release/git": "^10.0.1",
 		"@semantic-release/npm": "^9.0.1",
 		"@types/jest": "^27.5.1",
 		"@typescript-eslint/eslint-plugin": "^5.25.0",
