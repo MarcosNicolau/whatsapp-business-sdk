@@ -32,8 +32,8 @@ jobs:
         run: npm install
       - name: "Run build"
         run: npm run build
-      - name: "Run test"
-        run: npm run test
+      #- name: "Run test"
+      #   run: npm run test
       # Semantic release is configured to create a tag and publish the package to npm
       - name: "Version and Npm publish"
         run: npx semantic-release
