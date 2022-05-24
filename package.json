@@ -16,7 +16,7 @@
 	],
 	"scripts": {
 		"build": "tsc",
-		"prepare": "husky install",
+		"prepare": "tsc --build",
 		"test": "jest",
 		"cm": "cz"
 	},
