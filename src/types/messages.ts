@@ -1,4 +1,4 @@
-import { GenerateMappedNever, LiteralUnion } from "types/utils";
+import { GenerateMappedNever, LiteralUnion } from "./utils";
 
 export type SendMessageResponse = {
 	messaging_product: "whatsapp";

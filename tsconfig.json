@@ -18,9 +18,8 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"baseUrl": "./src",
 		"typeRoots": ["./src/types"],
 		"types": ["@types/jest", "jest"]
 	},
-	"include": ["src/**/*", "package.json", "__tests__"]
+	"include": ["src/**/*", "package.json"]
 }
