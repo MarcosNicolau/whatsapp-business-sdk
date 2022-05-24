@@ -24,20 +24,23 @@ export type MarkMessageAsReadPayload = {
 	message_id: string;
 };
 
+export type MessageType =
+	| "audio"
+	| "contacts"
+	| "document"
+	| "image"
+	| "interactive"
+	| "location"
+	| "sticker"
+	| "template"
+	| "text"
+	| "video";
+
 export type Message = {
 	/**
 	 * Defaults to text
 	 */
-	type?:
-		| "audio"
-		| "contacts"
-		| "document"
-		| "image"
-		| "location"
-		| "sticker"
-		| "template"
-		| "text"
-		| "video";
+	type?: MessageType;
 	messaging_product: LiteralUnion<"whatsapp">;
 	recipient_type?: LiteralUnion<"individual">;
 	/**
