@@ -1,9 +1,16 @@
 {
 	"name": "whatsapp-business",
+	"author": "MarcosNicolau",
 	"version": "1.0.0",
 	"description": "This is the common configuration for node js project with typescript I always do",
-	"main": "index.js",
-	"private": true,
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/MarcosNicolau/whatsapp-business-sdk/blob/main/LICENSE"
+		}
+	],
+	"main": "./dist/src/index.js",
+	"types": "./dist/src/index.d.ts",
 	"scripts": {
 		"build": "tsc",
 		"prepare": "husky install",
@@ -16,6 +23,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.0",
 		"@commitlint/config-conventional": "^17.0.0",
+		"@semantic-release/npm": "^9.0.1",
 		"@types/jest": "^27.5.1",
 		"@typescript-eslint/eslint-plugin": "^5.25.0",
 		"@typescript-eslint/parser": "^5.25.0",
@@ -32,7 +40,6 @@
 		"ts-jest": "^28.0.2",
 		"typescript": "^4.6.4"
 	},
-	"author": "myself",
 	"license": "ISC",
 	"config": {
 		"commitizen": {

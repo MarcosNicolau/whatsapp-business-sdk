@@ -15,22 +15,23 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: main
           fetch-depth: "0"
       - run: git fetch --depth=1 origin main +refs/tags/*:refs/tags/*
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          registry-url: https://registry.npmjs.org/
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: "Install"
-        run: npm install
-      - name: "Build"
+      - name: "Run build"
         run: npm run build
-      - name: "Version"
+      - name: "Run test"
+        run: npm run test
+      # Semantic release is configured to create a tag and publish the package to npm
+      - name: "Version and Npm publish"
         run: npx semantic-release
