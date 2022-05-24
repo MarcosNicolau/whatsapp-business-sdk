@@ -28,6 +28,8 @@ jobs:
       - uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: "Npm install"
+        run: npm install
       - name: "Run build"
         run: npm run build
       - name: "Run test"
