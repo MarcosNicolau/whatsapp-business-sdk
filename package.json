@@ -1,7 +1,7 @@
 {
 	"name": "whatsapp-business",
 	"author": "MarcosNicolau",
-	"version": "1.2.0",
+	"version": "1.1.0",
 	"description": "This is the common configuration for node js project with typescript I always do",
 	"licenses": [
 		{
