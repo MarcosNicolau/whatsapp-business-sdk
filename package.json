@@ -50,10 +50,18 @@
 		"ts-jest": "^28.0.2",
 		"typescript": "^4.6.4"
 	},
-	"license": "ISC",
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
 		}
-	}
+	},
+	"keywords": [
+		"meta",
+		"connector",
+		"nodejs",
+		"api",
+		"sdk",
+		"whatsapp",
+		"facebook"
+	]
 }
