@@ -20,6 +20,9 @@ export type MediaAcceptedFileTypes =
 	| "image/webp";
 
 export type UploadMediaPayload = {
+	/**
+	 * Path to the file stored in your local directory. For example: "@/local/path/file.jpg".
+	 */
 	file: string;
 	type: MediaAcceptedFileTypes;
 	messaging_product: "whatsapp";

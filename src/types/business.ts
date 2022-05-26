@@ -37,5 +37,5 @@ export type BusinessProfile = {
 export type BusinessProfileFieldsQuery = (keyof BusinessProfileFields)[];
 
 export type UpdateBusinessProfilePayload = Partial<
-	Omit<BusinessProfileFields, "messaging_product">
+	Omit<BusinessProfileFields, "messaging_product" | "id">
 >;
