@@ -1,12 +1,19 @@
 export type BusinessPhoneNumber = {
-	verified_name: "Jasper's Market";
-	display_phone_number: "+1 631-555-5555";
-	id: "1906385232743451";
-	quality_rating: "GREEN";
+	verified_name: string;
+	display_phone_number: string;
+	id: string;
+	quality_rating: string;
+	code_verification_status?: string;
 };
 
 export type GetBusinessPhoneNumberResponse = {
 	data: BusinessPhoneNumber[];
+	paging: {
+		cursors: {
+			before: string;
+			after: string;
+		};
+	};
 };
 
 export type RequestPhoneNumberVerificationCodePayload = {
@@ -14,7 +21,7 @@ export type RequestPhoneNumberVerificationCodePayload = {
 	/**
 	 * Your locale. For example: "en_US".
 	 */
-	locale: string;
+	language: string;
 };
 
 export type RequestPhoneNumberVerificationCodeArgs = RequestPhoneNumberVerificationCodePayload & {

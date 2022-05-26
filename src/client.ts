@@ -1,4 +1,5 @@
 import fs from "fs";
+import FormData from "form-data";
 import {
 	Message,
 	SendMessageResponse,
@@ -76,21 +77,25 @@ export class WABAClient {
 	 * MEDIA ENDPOINTS
 	 *
 	 */
-	uploadMedia(payload: Omit<UploadMediaPayload, "messaging_product">) {
-		return this.restClient.post<UploadMediaResponse, UploadMediaPayload>(
+	uploadMedia({ file, type }: Omit<UploadMediaPayload, "messaging_product">) {
+		const formData = new FormData();
+		formData.append("type", type);
+		formData.append("file", fs.createReadStream(file));
+		formData.append("messaging_product", "whatsapp");
+		return this.restClient.post<UploadMediaResponse, FormData>(
 			`${this.phoneId}/media`,
+			formData,
 			{
-				...payload,
-				messaging_product: "whatsapp",
+				headers: { "Content-Type": "multipart/form-data" },
 			}
 		);
 	}
 
 	getMedia(id: string) {
-		return this.restClient.get<GetMediaResponse>(`${this.phoneId}/${id}`);
+		return this.restClient.get<GetMediaResponse>(id);
 	}
 	deleteMedia(id: string) {
-		this.restClient.delete<DefaultResponse>(`${this.phoneId}/${id}`);
+		return this.restClient.delete<DefaultResponse>(id);
 	}
 	/**
 	 *
@@ -98,12 +103,16 @@ export class WABAClient {
 	 * @param pathToSaveFile the path where you want to store the media
 	 */
 	async downloadMedia(url: string, pathToSaveFile: string) {
-		const response = await this.restClient.get(
-			"",
-			{},
-			{ baseURL: url, responseType: "stream" }
-		);
-		return response.pipe(fs.createWriteStream(pathToSaveFile));
+		try {
+			const response = await this.restClient.get(
+				url,
+				{},
+				{ baseURL: "", responseType: "stream" }
+			);
+			return response.pipe(fs.createWriteStream(pathToSaveFile));
+		} catch (err) {
+			return Promise.reject(err);
+		}
 	}
 	/*
 	 *
@@ -141,7 +150,7 @@ export class WABAClient {
 		);
 	}
 	async getSingleBusinessPhoneNumber(phoneNumberId: string) {
-		return this.restClient.get<BusinessPhoneNumber>(`/${this.accountId}/${phoneNumberId}`);
+		return this.restClient.get<BusinessPhoneNumber>(phoneNumberId);
 	}
 	async requestPhoneNumberVerificationCode({
 		phoneNumberId,
@@ -165,6 +174,6 @@ export class WABAClient {
 		return this.restClient.post<DefaultResponse>(`${phoneNumber}/deregister`);
 	}
 	async setupTwoStepAuth({ phoneNumberId, ...payload }: SetUpTwoFactorAuthArgs) {
-		return this.restClient.post<DefaultResponse>(`${phoneNumberId}`, payload);
+		return this.restClient.post<DefaultResponse>(phoneNumberId, payload);
 	}
 }
