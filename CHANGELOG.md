@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.1.0...v1.1.1) (2022-05-26)
+
+
+### Bug Fixes
+
+* 🐛 endpoints and typos ([fd9b9f0](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/fd9b9f080c60e6e5246e26fb8b5cc50036cc3001))
+
 # [1.1.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.0.0...v1.1.0) (2022-05-25)
 
 
