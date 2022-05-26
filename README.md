@@ -63,7 +63,7 @@ const webhookListener = (res: Webhook) => {};
 This project uses typescript. Resources are stored in 2 key structures:
 
 -   <b>src</b>: the whole connector written in typescript
--   <b>dist</b> the packed bundle of the project for use in browser environments.
+-   <b>dist</b> the packed bundle of the project for use in nodejs environments.
 
 ## Testing
 I am currently working on test integration. 
