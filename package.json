@@ -2,7 +2,8 @@
 	"name": "whatsapp-business",
 	"author": "MarcosNicolau",
 	"version": "1.2.2",
-	"description": "This is the common configuration for node js project with typescript I always do",
+	"description": "Node.js connector for the WhatsApp Business APIs with TypeScript support, integration tests and more.",
+	"license": "MIT",
 	"licenses": [
 		{
 			"type": "MIT",
@@ -20,8 +21,8 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"prepare": "tsc --build",
 		"test": "jest",
+		"prepare": "tsc --build",
 		"cm": "cz"
 	},
 	"repository": {
