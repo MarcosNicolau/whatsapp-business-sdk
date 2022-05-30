@@ -127,6 +127,19 @@ describe("WABA Cloud API endpoints", () => {
 				})
 			);
 		});
+
+		it("marks message as read", async () => {
+			try {
+				const res = await client.markMessageAsRead(
+					"wamid.HBgNNTQ5MTEyMTc5NjMwNBUCABEYEjJGNjE1QzQ2RjRFQUI4MUVCMAA="
+				);
+				expectDefaultResponse(res);
+			} catch (err: any) {
+				//The message id passed is not real.
+				//So to test that the endpoints is working we just compare with the err message
+				expect(err?.message).toBe("Parameter value is not valid");
+			}
+		});
 	});
 
 	describe("phone number endpoints", () => {
