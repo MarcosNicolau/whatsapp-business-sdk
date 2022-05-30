@@ -9,9 +9,9 @@
 
 Node.js connector for WhatsApp Business Cloud API, with TypeScript support.
 
-This project offers a solution to easily interact with WhatsApp Business Cloud API. Built with Axios and no other extra dependency!
+This project offers a solution to easily interact with WhatsApp Business Cloud API with Heavy integration testing with real API calls to support implementation stability. Built with Axios and no other extra dependency!
 
-The connector is fully typed and documented!
+The connector is fully typed, tested and documented!
 
 ## Installation
 
@@ -25,13 +25,15 @@ Most methods accept JS objects. These can be populated using parameters specifie
 
 # Usage
 
+### Basic usage
+
 ```typescript
 import { WABAClient, WABAErrorAPI } from "whatsapp-business";
 
+//You cant get it from the meta for developers app administration
 const client = new WABAClient({
 	accountId: "YOUR_ACCOUNT_ID",
 	apiToken: "YOUR_API_TOKEN",
-	//You cant get it from the meta for developers app administration
 	phoneId: "YOUR_BUSINESS_PHONE_ID",
 });
 
@@ -48,6 +50,32 @@ const foo = async () => {
 foo();
 ```
 
+### Sending a message
+
+```typescript
+const sendTextMessage = async (body: string, to: string) => {
+	try {
+		const res = await client.sendMessage({ type: "text", text: { body }, to });
+		console.log(res);
+	} catch (err) {
+		const error: WABAErrorAPI = err;
+		console.error(error.message);
+	}
+};
+```
+
+## Support
+
+| Cloud API                                     | Business Management API | Analytics API                  |
+| --------------------------------------------- | ----------------------- | ------------------------------ |
+| <ul><li>- [x] Business profiles endpoints     | Currently working on    | Planning to add future support |
+| <ul><li>- [x] Media endpoints                 |                         |
+| <ul><li>- [x] Message endpoints               |                         |
+| <ul><li>- [x] Phone Numbers endpoints         |
+| <ul><li>- [x] Registration endpoints          |                         |
+| <ul><li>- [x] Two-Step-Verification endpoints |                         |
+| <ul><li>- [x] Webhooks types                  |                         |
+
 ### Webhooks
 
 Although there is no current support for managing webhooks from the API, you can access the Webhooks response types
@@ -58,17 +86,14 @@ import { Webhook } from "whatsapp-business";
 const webhookListener = (res: Webhook) => {};
 ```
 
-## Project structure
+# Project
+
+## Structure
 
 This project uses typescript. Resources are stored in 2 key structures:
 
 -   <b>src</b>: the whole connector written in typescript
 -   <b>dist</b> the packed bundle of the project for use in browser environments.
-
-## Testing
-I am currently working on test integration. 
-
-The idea is to make a heavy testing integration with real API calls to support implementation stability. 
 
 ## Contribution and thanks
 
