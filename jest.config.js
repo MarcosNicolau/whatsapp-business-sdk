@@ -4,13 +4,12 @@
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-const { compilerOptions } = require("./tsconfig.json");
 
 module.exports = {
 	preset: "ts-jest",
 	testEnvironment: "node",
 	setupFilesAfterEnv: ["./__tests__/setup.ts"],
-	modulePaths: [compilerOptions.baseUrl],
+	modulePaths: ["./src"],
 	// Indicates whether the coverage information should be collected while executing the test
 	collectCoverage: true,
 	// The directory where Jest should output its coverage files

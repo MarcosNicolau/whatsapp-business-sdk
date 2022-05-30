@@ -19,25 +19,26 @@ export const createRestClient = ({ baseURL, apiToken, errorHandler }: RestClient
 	);
 
 	return {
+		fetch,
 		get: async <Response = any, Params = Record<string, string>>(
 			endpoint: string,
 			params?: Params,
 			config?: AxiosRequestConfig
-		) => (await fetch.get<Response>(endpoint, { params, ...config })).data,
+		) => (await fetch.get<Response>(endpoint, { params, ...config }))?.data,
 		post: async <Response = any, Payload = Record<string, any>>(
 			endpoint: string,
 			payload?: Payload,
 			config?: AxiosRequestConfig
-		) => (await fetch.post<Response>(endpoint, payload, config)).data,
+		) => (await fetch.post<Response>(endpoint, payload, config))?.data,
 		put: async <Response = any, Payload = Record<string, any>>(
 			endpoint: string,
 			payload?: Payload,
 			config?: AxiosRequestConfig
-		) => (await fetch.put<Response>(endpoint, payload, config)).data,
+		) => (await fetch.put<Response>(endpoint, payload, config))?.data,
 		delete: async <Response = any, Params = Record<string, any>>(
 			endpoint: string,
 			params?: Params,
 			config?: AxiosRequestConfig
-		) => (await fetch.delete<Response>(endpoint, { params, ...config })).data,
+		) => (await fetch.delete<Response>(endpoint, { params, ...config }))?.data,
 	};
 };
