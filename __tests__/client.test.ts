@@ -106,7 +106,7 @@ describe("WABA Cloud API endpoints", () => {
 	describe("message endpoints", () => {
 		it("sends a text message", async () => {
 			const res = await client.sendMessage({
-				to: process.env.MESSAGE_TO,
+				to: process.env.MESSAGE_TO || "",
 				type: "text",
 				text: { body: "This message was sent from a test environment" },
 			});
