@@ -50,6 +50,7 @@
 		"commitizen": "^4.2.4",
 		"cz-conventional-changelog": "3.3.0",
 		"devmoji": "^2.3.0",
+		"dotenv": "^16.0.1",
 		"eslint": "^8.16.0",
 		"eslint-plugin-import": "^2.26.0",
 		"husky": "^8.0.1",

@@ -32,10 +32,17 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
       - name: "Install"
         run: yarn install
+      - name: Create envfile for testing
+        run: |
+          touch .env
+          echo ACCOUNT_ID=${{ secrets.ACCOUNT_ID }} >> .env
+          echo API_TOKEN=${{ secrets.API_TOKEN }} >> .env
+          echo PHONE_ID=${{ secrets.PHONE_ID }} >> .env
+          echo MESSAGE_TO=${{ secrets.MESSAGE_TO }} >> .env
+      - name: "Test"
+        run: yarn test
       - name: "Run build"
         run: yarn run build
-      #- name: "Run test"
-      #   run: npm run test
       # Semantic release is configured to create a tag and publish the package to npm
       - name: "Version and Npm publish"
         run: npx semantic-release

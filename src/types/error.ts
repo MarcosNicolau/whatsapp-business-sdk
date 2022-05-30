@@ -61,14 +61,14 @@ export type WABAErrorAPI = {
 	message: WABAErrorMessages;
 	type: string;
 	code: WABAErrorCodes; // please refer to the Error Codes section
-	error_data: {
+	error_data?: {
 		messaging_product: "whatsapp";
 		/**
 		 * detailed error message to help with debugging
 		 */
 		details: string;
 	};
-	error_subcode: number;
+	error_subcode?: number;
 	fbtrace_id: string;
 };
 

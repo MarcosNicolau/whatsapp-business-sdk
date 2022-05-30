@@ -43,7 +43,7 @@ export class WABAClient {
 		this.restClient = createRestClient({
 			apiToken,
 			baseURL: "https://graph.facebook.com/v13.0",
-			errorHandler: (error) => WABAErrorHandler(error?.response?.data),
+			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}
 
@@ -90,7 +90,6 @@ export class WABAClient {
 			}
 		);
 	}
-
 	getMedia(id: string) {
 		return this.restClient.get<GetMediaResponse>(id);
 	}
