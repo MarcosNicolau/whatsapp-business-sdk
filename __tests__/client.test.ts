@@ -92,7 +92,7 @@ describe("WABA Cloud API endpoints", () => {
 		it("download media", async () => {
 			const res = await client.downloadMedia(
 				mediaUrl,
-				path.resolve(__dirname, "testUpload.txt")
+				path.resolve(__dirname, "testDownload.txt")
 			);
 			expect(res).toBeTruthy();
 		});
