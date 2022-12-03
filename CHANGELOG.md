@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.2.3...v1.3.0) (2022-12-03)
+
+
+### Features
+
+* ✨ updated WABAClient baseURL ([aca3d65](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/aca3d65cf3d71c0f362f6c39653ddd0a73d73c11))
+
 ## [1.1.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.1.0...v1.1.1) (2022-05-26)
 
 
