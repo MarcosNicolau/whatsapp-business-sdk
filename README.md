@@ -66,11 +66,14 @@ const sendTextMessage = async (body: string, to: string) => {
 
 ### Webhooks
 
+The webhook client will handle the subscription and setup for the webhooks. You must have an HTTPS connection and add the server URL in your application management.
+
+For more info, checks the docs [here](https://developers.facebook.com/docs/whatsapp/business-management-api/guides/set-up-webhooks)
+
 ```typescript
 import { WebhookClient, WABAClient } from "./index";
 
 //The token and path must match the values you set on the application management
-//More info here https://developers.facebook.com/docs/whatsapp/business-management-api/guides/set-up-webhooks
 const webhookClient = new WebhookClient({
 	token: "YOUR_VALIDATION_TOKEN",
 	path: "/whatsapp/business",
@@ -112,7 +115,7 @@ webhookClient.initWebhook({
 | Webhooks                         |
 | -------------------------------- |
 | <ul><li>- [x] Cloud API          |
-| <ul><li>- [] Business Management |
+| <ul><li>- [ ] Business Management |
 
 | Business Management API |
 | ----------------------- |
