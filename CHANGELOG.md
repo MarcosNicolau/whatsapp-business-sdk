@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.3.0...v1.4.0) (2022-12-04)
+
+
+### Bug Fixes
+
+* 🐛 undefined fields in webhookHandler ([59ddcbb](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/59ddcbb7aa4aa39f8af8b0bc2e9c1444dc6d99f7))
+
+
+### Features
+
+* ✨ webhook client ([27c3d1a](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/27c3d1aeca40af2551a05ceb118924c3e9031622))
+
 # [1.3.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.2.3...v1.3.0) (2022-12-03)
 
 
