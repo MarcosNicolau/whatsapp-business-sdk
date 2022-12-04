@@ -64,27 +64,63 @@ const sendTextMessage = async (body: string, to: string) => {
 };
 ```
 
-## Support
-
-| Cloud API                                     | Business Management API | Analytics API                  |
-| --------------------------------------------- | ----------------------- | ------------------------------ |
-| <ul><li>- [x] Business profiles endpoints     | Currently working on    | Planning to add future support |
-| <ul><li>- [x] Media endpoints                 |                         |
-| <ul><li>- [x] Message endpoints               |                         |
-| <ul><li>- [x] Phone Numbers endpoints         |
-| <ul><li>- [x] Registration endpoints          |                         |
-| <ul><li>- [x] Two-Step-Verification endpoints |                         |
-| <ul><li>- [x] Webhooks types                  |                         |
-
 ### Webhooks
 
-Although there is no current support for managing webhooks from the API, you can access the Webhooks response types
-
 ```typescript
-import { Webhook } from "whatsapp-business";
+import { WebhookClient, WABAClient } from "./index";
 
-const webhookListener = (res: Webhook) => {};
+//The token and path must match the values you set on the application management
+//More info here https://developers.facebook.com/docs/whatsapp/business-management-api/guides/set-up-webhooks
+const webhookClient = new WebhookClient({
+	token: "YOUR_VALIDATION_TOKEN",
+	path: "/whatsapp/business",
+});
+const wabaClient = new WABAClient({
+	accountId: "ACCOUNT_ID",
+	phoneId: "PHONE_ID",
+	apiToken: "API_TOKEN",
+});
+
+//init webhooks takes an object of functions that will be triggered based on the received webhook event type
+webhookClient.initWebhook({
+	onTextMessageReceived: async (payload, contact) => {
+		try {
+			await waba_client.markMessageAsRead(payload.id.toString());
+			await waba_client.sendMessage({
+				type: "text",
+				to: contact.wa_id,
+				text: { body: "Ok!" },
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	},
+});
 ```
+
+## Support
+
+| Cloud API                                     |
+| --------------------------------------------- |
+| <ul><li>- [x] Business profiles endpoints     |
+| <ul><li>- [x] Media endpoints                 |
+| <ul><li>- [x] Message endpoints               |
+| <ul><li>- [x] Phone Numbers endpoints         |
+| <ul><li>- [x] Registration endpoints          |
+| <ul><li>- [x] Two-Step-Verification endpoints |
+
+| Webhooks                         |
+| -------------------------------- |
+| <ul><li>- [x] Cloud API          |
+| <ul><li>- [] Business Management |
+
+| Business Management API |
+| ----------------------- |
+| Currently working on    |
+
+| Analytics API                  |
+| ------------------------------ |
+| Planning to add future support |
 
 # Project
 
@@ -93,7 +129,8 @@ const webhookListener = (res: Webhook) => {};
 This project uses typescript. Resources are stored in 2 key structures:
 
 -   <b>src</b>: the whole connector written in typescript
--   <b>dist</b> the packed bundle of the project for use in nodejs environments.
+-   <b>dist</b> the packed bundle of the project for use in nodejs environments (generated when running yarn run build).
+-   <b>\_\_tests\_\_</b> all the tests for the connector
 
 ## Contribution and thanks
 
