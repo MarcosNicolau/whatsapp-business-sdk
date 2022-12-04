@@ -11,12 +11,12 @@ export const webhookHandler = (
 	}: Omit<WebhookEvents, "onStartListening">
 ) => {
 	body.entry?.forEach((entry) => {
-		entry.changes.forEach((change) => {
-			//The contact is always the 0
-			const contact = change.value.contacts[0];
+		entry?.changes?.forEach((change) => {
 			//Generally, if not always, the message is just the index 0
 			//But, since the docs don't say anything, we do it through a loop
-			change.value.messages?.forEach((message) => {
+			change?.value?.messages?.forEach((message) => {
+				//The contact is always the 0 and it is only received when there the messages field is present
+				const contact = change?.value?.contacts[0];
 				//Call message event
 				onMessageReceived && onMessageReceived(message, contact);
 				//If the message is type of text, then call the respective event
@@ -34,11 +34,11 @@ export const webhookHandler = (
 						);
 			});
 			//Call status event
-			change.value.statuses?.forEach((status) => {
+			change?.value?.statuses?.forEach((status) => {
 				onStatusReceived && onStatusReceived(status);
 			});
 			//Call error event
-			change.value.errors.forEach((err) => onError && onError(err, contact));
+			change?.value?.errors?.forEach((err) => onError && onError(err));
 		});
 	});
 };

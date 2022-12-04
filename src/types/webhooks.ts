@@ -374,5 +374,5 @@ export type WebhookEvents = {
 	/**
 	 * Gets fired whenever there is an err
 	 */
-	onError?: (payload: WebhookError, contact: WebhookContact) => void;
+	onError?: (payload: WebhookError) => void;
 };
