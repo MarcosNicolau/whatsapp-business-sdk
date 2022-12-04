@@ -31,6 +31,22 @@ describe("Webhook Client tests", () => {
 		return client;
 	};
 
+	const getWebhookRouter = ({ token, expressApp, port, path }: WebhookClientArgs) => {
+		// Extending the client to get access to the router protected member
+		class Router extends WebhookClient {
+			getRouter() {
+				this.initWebhook(events);
+				return this.router;
+			}
+		}
+		return new Router({
+			port,
+			path,
+			token,
+			expressApp,
+		}).getRouter();
+	};
+
 	beforeEach(() => {
 		jest.clearAllMocks();
 		jest.restoreAllMocks();
@@ -60,33 +76,20 @@ describe("Webhook Client tests", () => {
 
 	it("should use the router", () => {
 		const app = express();
-		startWebhook({ port, path, token: "", expressApp: { app, shouldStartListening: false } });
-		expect(app.use).toHaveBeenCalledWith(
-			path,
-			expect.objectContaining({ get: expect.anything(), post: expect.anything() })
-		);
+		const router = getWebhookRouter({
+			token: "",
+			expressApp: { app, shouldStartListening: false },
+		});
+		expect(app.use).toHaveBeenCalledWith(path, router);
 	});
 
 	it("router GET and POST should be called with their appropriate controllers", () => {
-		//Spy the controllers for later call check
+		//Create a spy on the controllers
 		const module = jest.requireActual("../src/webhooks/helpers.ts");
 		jest.spyOn(module, "getWebhookController").mockImplementation(jest.fn((token) => token));
 		jest.spyOn(module, "postWebhookController").mockImplementation(jest.fn((events) => events));
-		// Extending the client to get access to the router protected member
-		class Router extends WebhookClient {
-			getRouter() {
-				this.initWebhook(events);
-				return this.router;
-			}
-		}
-		const app = express();
 		const token = "";
-		const router = new Router({
-			port,
-			path,
-			token,
-			expressApp: { app, shouldStartListening: true },
-		}).getRouter();
+		const router = getWebhookRouter({ token });
 		expect(router.get).toHaveBeenCalledWith("/", getWebhookController(token));
 		expect(router.post).toHaveBeenCalledWith("/", postWebhookController(events));
 	});
@@ -124,7 +127,7 @@ describe("Webhook Client tests", () => {
 		expect(events.onTextMessageReceived).toHaveBeenCalledTimes(1);
 		expect(events.onMessageReceived).toHaveBeenCalledWith(fields.message, contact);
 		expect(events.onTextMessageReceived).toHaveBeenCalledWith(fields.textMessage, contact);
-		expect(events.onError).toHaveBeenCalledWith(fields.error, contact);
+		expect(events.onError).toHaveBeenCalledWith(fields.error);
 		expect(events.onStatusReceived).toHaveBeenCalledWith(fields.status);
 	});
 });
