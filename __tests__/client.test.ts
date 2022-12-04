@@ -1,5 +1,5 @@
 import path from "path";
-import { WABAClient } from "../src/client";
+import { WABAClient } from "../src/WABA_client";
 import {
 	BusinessPhoneNumber,
 	ERROR_CODES,
