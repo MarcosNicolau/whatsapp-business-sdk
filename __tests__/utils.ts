@@ -1,3 +1,10 @@
+import {
+	Webhook,
+	WebhookContact,
+	WebhookError,
+	WebhookMessage,
+	WebhookStatus,
+} from "./../src/types/webhooks";
 import { DefaultResponse } from "./../src/types/response";
 import { WABAErrorAPI } from "../src/types";
 
@@ -18,3 +25,81 @@ export const matchesWABAErrorObject = (err: any) =>
 
 export const expectDefaultResponse = (data: any) =>
 	expect(data).toEqual(expect.objectContaining<DefaultResponse>({ success: true }));
+
+//This object is a mock of the body that the webhook listener receives. It is used to testing the webhookHandler
+
+export const webhookBodyFields: {
+	contact: WebhookContact;
+	textMessage: WebhookMessage;
+	message: WebhookMessage;
+	status: WebhookStatus;
+	error: WebhookError;
+} = {
+	contact: { profile: { name: "" }, wa_id: "" },
+	textMessage: {
+		type: "text",
+		from: "",
+		id: 32,
+		timestamp: 21,
+		text: {
+			body: "Hi",
+		},
+	},
+	message: {
+		type: "audio",
+		from: "",
+		id: 32,
+		timestamp: 21,
+		text: {
+			body: "Hi",
+		},
+	},
+	status: {
+		conversation: {
+			id: "",
+			origin: {
+				expiration_timestamp: "",
+				type: {
+					business_initiated: false,
+					customer_initiated: true,
+					referral_conversation: false,
+				},
+			},
+		},
+		id: "",
+		pricing: {
+			category: {
+				business_initiated: false,
+				customer_initiated: true,
+				referral_conversion: false,
+			},
+			pricing_model: "",
+		},
+		recipient_id: "",
+		status: "read",
+		timestamp: 465,
+	},
+	error: { code: 2, title: "ERR" },
+};
+
+export const webhookBody: Webhook = {
+	object: "whatsapp",
+	entry: [
+		{
+			changes: [
+				{
+					field: "",
+					value: {
+						contacts: [webhookBodyFields.contact],
+						messages: [webhookBodyFields.textMessage, webhookBodyFields.message],
+						statuses: [webhookBodyFields.status, webhookBodyFields.status],
+						errors: [webhookBodyFields.error, webhookBodyFields.error],
+						messaging_product: "whatsapp",
+						metadata: { display_phone_number: "", phone_number_id: "" },
+					},
+				},
+			],
+			id: "",
+		},
+	],
+};
