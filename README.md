@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/MarcosNicolau/whatsapp-business-sdk/Release)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MarcosNicolau/whatsapp-business-sdk/npm_publish.yml?branch=main)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MarcosNicolau/whatsapp-business-sdk)
 ![npm](https://img.shields.io/npm/v/whatsapp-business)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/whatsapp-business)
