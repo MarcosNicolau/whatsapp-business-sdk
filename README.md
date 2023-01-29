@@ -1,9 +1,11 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/MarcosNicolau/whatsapp-business-sdk/npm_publish.yml?branch=main)
+![Known Vulnerabilities](https://snyk.io/test/github/MarcosNicolau/whatsapp-business-sdk/badge.svg)
+![Codecov](https://img.shields.io/codecov/c/github/MarcosNicolau/whatsapp-business-sdk?token=G20JHIZMRW)
 ![GitHub last commit](https://img.shields.io/github/last-commit/MarcosNicolau/whatsapp-business-sdk)
-![npm](https://img.shields.io/npm/v/whatsapp-business)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/whatsapp-business)
-![GitHub](https://img.shields.io/github/license/MarcosNicolau/whatsapp-business-sdk)
 ![GitHub top language](https://img.shields.io/github/languages/top/MarcosNicolau/whatsapp-business-sdk)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/whatsapp-business)
+![npm](https://img.shields.io/npm/v/whatsapp-business)
+![GitHub](https://img.shields.io/github/license/MarcosNicolau/whatsapp-business-sdk)
 
 # WhatsApp Business API SDK
 
@@ -112,9 +114,9 @@ webhookClient.initWebhook({
 | <ul><li>- [x] Registration endpoints          |
 | <ul><li>- [x] Two-Step-Verification endpoints |
 
-| Webhooks                         |
-| -------------------------------- |
-| <ul><li>- [x] Cloud API          |
+| Webhooks                          |
+| --------------------------------- |
+| <ul><li>- [x] Cloud API           |
 | <ul><li>- [ ] Business Management |
 
 | Business Management API |
