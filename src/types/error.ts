@@ -9,7 +9,7 @@ export const ERROR_CODES = {
 	3: "API Method",
 	4: "API Too Many Calls",
 	10: "API Permission Denied",
-	100: "ParameterInvalid",
+	100: "Invalid parameter",
 	190: "Access token has expired",
 	200: "API Permission",
 	299: "API Permission",
@@ -48,6 +48,7 @@ export const ERROR_CODES = {
 	133007: "Account Blocked",
 	133008: "Too Many PIN Guesses",
 	133009: "PIN Guessed Too Fast",
+	136025: "Verify code error",
 } as const;
 
 export type WABAErrorCodes = keyof typeof ERROR_CODES;
