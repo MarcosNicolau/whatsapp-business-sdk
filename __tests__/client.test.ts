@@ -137,7 +137,10 @@ describe("WABA Cloud API endpoints", () => {
 			} catch (err: any) {
 				//The message id passed is not real.
 				//So to test that the endpoints is working we just compare with the err message
-				expect(err?.message).toBe("ParameterInvalid");
+				expect(err).toMatchObject<Partial<WABAErrorAPI>>({
+					code: 100,
+					message: ERROR_CODES[100],
+				});
 			}
 		});
 	});
@@ -195,8 +198,8 @@ describe("WABA Cloud API endpoints", () => {
 			//We cant verify with the real code
 			//So we just make sure that the API call was made
 			expect(err).toMatchObject<Partial<WABAErrorAPI>>({
-				message: ERROR_CODES[100],
-				code: 100,
+				message: ERROR_CODES[136025],
+				code: 136025,
 			});
 		}
 	});

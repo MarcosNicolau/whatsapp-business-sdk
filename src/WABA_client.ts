@@ -31,18 +31,16 @@ interface WABAClientArgs {
 }
 
 export class WABAClient {
-	private apiToken: string;
 	restClient: ReturnType<typeof createRestClient>;
 	phoneId: string;
 	accountId: string;
 
 	constructor({ apiToken, phoneId, accountId }: WABAClientArgs) {
-		this.apiToken = apiToken;
 		this.phoneId = phoneId;
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
-			baseURL: "https://graph.facebook.com/v15.0",
+			baseURL: "https://graph.facebook.com/v16.0",
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}

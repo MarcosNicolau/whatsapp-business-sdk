@@ -34,7 +34,15 @@ export type MessageType =
 	| "sticker"
 	| "template"
 	| "text"
-	| "video";
+	| "video"
+	| "reaction";
+
+export type MessageContext = {
+	/**
+	 * The message id you receive on the webhooks
+	 */
+	message_id: string;
+};
 
 export type Message = {
 	/**
@@ -43,6 +51,10 @@ export type Message = {
 	type?: MessageType;
 	messaging_product: LiteralUnion<"whatsapp">;
 	recipient_type?: LiteralUnion<"individual">;
+	/**
+	 * Use it if you want to use the reply-to feature when answering a message
+	 */
+	context?: MessageContext;
 	/**
 	 * WhatsApp ID or phone number for the person you want to send a message to.
 	 * See https://developers.facebook.com/docs/whatsapp/cloud-api/reference/phone-numbers#formatting for more information.
@@ -88,26 +100,41 @@ export type Message = {
 	 * Required when type=video.
 	 */
 	video?: MediaObject;
+	/**
+	 * Required when type=reaction.
+	 */
+	reaction?: ReactionMessage;
 };
 
 export type MediaObject = {
 	/**
 	 * Required when type is audio, document, or image and you are not using a link.
+	 *
+	 * You get the media object ID after uploading a media to whatsapp server. For further information refer here https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media#get-media-id
 	 */
 	id?: string;
 	/**
-	 * Required when type is audio, document, image, video, and sticker and you are not using an uploaded media ID.
+	 * Required when type is audio, document, image, sticker, or video and you are not using an uploaded media ID (i.e. you are hosting the media asset on your server).
+	 *
 	 * The protocol and URL of the media to be sent. Use only with HTTP/HTTPS URLs.
 	 */
 	link?: string;
 	/**
-	 * Describes the specified document or image media.
+	 * Describes the specified image, document, or video media.
+	 *
+	 * Do not use with audio or sticker media.
 	 */
 	caption?: string;
 	/**
 	 * Describes the filename for the specific document. Use only with document media.
+	 *
+	 * The extension of the filename will specify what format the document is displayed as in WhatsApp.
 	 */
 	filename?: string;
+	/**
+	 * This path is optionally used with a link when the HTTP/HTTPS link is not directly accessible and requires additional configurations like a bearer token.
+	 */
+	provider?: string;
 };
 
 export type ContactMessageAddress = {
@@ -317,13 +344,46 @@ export type TemplateMessage = {
 
 export type TextMessage = {
 	/**
-	 * 
-	 * The text of the text message which can contain URLs which begin with http:// or https:// and formatting. See available formatting options here.
- 	   
-		If you include URLs in your text and want to include a preview box in text messages (preview_url: true), make sure the URL starts with http:// or https:// —https:// URLs are preferred. You must include a hostname, since IP addresses will not be matched.
-
-		Maximum length: 4096 characters
+	 *
+	 * The text of the text message which can contain URLs which begin with
+	 * http:// or https:// and formatting. See available formatting options here
+	 * https://developers.facebook.com/docs/whatsapp/on-premises/reference/messages#formatting.
+	 *
+	 * If you include URLs in your text and want to include a preview box in text messages (preview_url: true), make sure the URL starts with http:// or https:// —https:// URLs are preferred. You must include a hostname, since IP addresses will not be matched.
+	 *
+	 * Maximum length: 4096 characters
 	 */
 	body: string;
+	/**
+	 * By default, WhatsApp recognizes URLs and makes them clickable,
+	 * but you can also include a preview box with more information about the link. Set this field to true if you want to include a URL preview box.
+	 *
+	 * The majority of the time, the receiver will see a URL they can click on when you send an URL, set preview_url to true, and provide a body object with a http or https link.
+	 *
+	 * Default: false.
+	 */
 	preview_url?: boolean;
+};
+
+export type ReactionMessage = {
+	/**
+	 * The WhatsApp Message ID (wamid) of the message on which the reaction should appear. The reaction will not be sent if:
+	 *
+	 *  - The message is older than 30 days
+	 *  - The message is a reaction message
+	 *  - The message has been deleted
+	 *
+	 * If the ID is of a message that has been deleted, the message will not be deliver
+	 */
+	message_id: string;
+	/**
+	 * Emoji to appear on the message.
+	 *
+	 * - All emojis supported by Android and iOS devices are supported.
+	 * - Rendered-emojis are supported.
+	 * - If using emoji unicode values, values must be Java- or JavaScript-escape encoded. to see emoji
+	 * - Only one emoji can be sent in a reaction message
+	 * - Use an empty string to remove a previously sent emoji.
+	 */
+	emoji: string;
 };
