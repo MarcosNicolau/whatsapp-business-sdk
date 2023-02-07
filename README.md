@@ -52,18 +52,39 @@ const foo = async () => {
 foo();
 ```
 
-### Sending a message
+### Sending messages
+
+You can send a text message
 
 ```typescript
 const sendTextMessage = async (body: string, to: string) => {
 	try {
-		const res = await client.sendMessage({ type: "text", text: { body }, to });
+		const res = await client.sendMessage({ to, type: "text", text: { body } });
 		console.log(res);
 	} catch (err) {
 		const error: WABAErrorAPI = err;
 		console.error(error.message);
 	}
 };
+```
+
+or an image
+
+```typescript
+const sendPictureMessage = async ({ link, caption }: MediaObject, to: string) => {
+	try {
+		const res = await client.sendMessage({ to, type: "image", image: { link, caption } });
+		console.log(res);
+	} catch (err) {
+		const error: WABAErrorAPI = err;
+		console.error(error.message);
+	}
+};
+
+sendPictureMessage(
+	{ link: "<url_link_to_your_image>", caption: "<image_description>" },
+	"<PHONE_NUMBER>"
+);
 ```
 
 ### Webhooks
@@ -88,13 +109,30 @@ const wabaClient = new WABAClient({
 
 //init webhooks takes an object of functions that will be triggered based on the received webhook event type
 webhookClient.initWebhook({
+	onStartListening: () => {
+		console.log("Server started listening");
+	},
 	onTextMessageReceived: async (payload, contact) => {
 		try {
-			await waba_client.markMessageAsRead(payload.id.toString());
-			await waba_client.sendMessage({
+			const messageId = payload.id.toString();
+			const contactNumber = contact.wa_id;
+			//Mark message as read
+			await wabaClient.markMessageAsRead(messageId);
+			//React to message
+			await wabaClient.sendMessage({
+				to: contactNumber,
+				type: "reaction",
+				reaction: { message_id: messageId, emoji: "😄" },
+			});
+			//Respond to message
+			await wabaClient.sendMessage({
 				type: "text",
-				to: contact.wa_id,
+				to: contactNumber,
 				text: { body: "Ok!" },
+				//This is optional, it enables reply-to feature
+				context: {
+					message_id: messageId,
+				},
 			});
 		} catch (err) {
 			console.log(err);
