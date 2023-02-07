@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.4.0...v1.5.0) (2023-02-07)
+
+
+### Bug Fixes
+
+* 🐛 wABAErrorHandler ([f531d38](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f531d38d8caebe091f0b7e405e33027655c0f673))
+* **types:** 🐛 literal union autocompletion ([9714956](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/97149567c19ac59a280e8f925d47961395e022fa))
+
+
+### Features
+
+* ✨ support for reaction messages and reply-to ([0f59d40](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/0f59d408e9e47d75cd68b47c792d490d5730f79d))
+* ✨ updated waba client api ([2b52118](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/2b521181c2ccffe442bc980e0c450c2e26d50a83))
+
 # [1.4.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.3.0...v1.4.0) (2022-12-04)
 
 
