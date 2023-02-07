@@ -7,7 +7,8 @@
  * //And I still have autocompletion!
  * if (foo === "other_value") return;
  */
-export type LiteralUnion<T extends U, U = string> = T | (U & {}); // eslint-disable-line @typescript-eslint/ban-types
+export type LiteralUnion<T extends string> = T | (string & {}); // eslint-disable-line @typescript-eslint/ban-types
+
 /**
  * Adds number autocompletion as if it was a union, but allows other number values
  *
@@ -17,7 +18,7 @@ export type LiteralUnion<T extends U, U = string> = T | (U & {}); // eslint-disa
  * //And I still have autocompletion!
  * if (foo === 1) return;
  */
-export type LiteralNumberUnion<T extends U, U = number> = T | (U & {}); // eslint-disable-line @typescript-eslint/ban-types
+export type LiteralNumberUnion<T extends number> = T | (number & {}); // eslint-disable-line @typescript-eslint/ban-types
 
 /**
  * Takes a type and maps all its values to never
