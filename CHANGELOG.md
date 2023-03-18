@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.0...v1.5.1) (2023-03-18)
+
+
+### Bug Fixes
+
+* **types:** 🐛 interactive message ([4428f18](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/4428f180372866e71787fb650c4a6b5a1badcc1a)), closes [#7](https://github.com/MarcosNicolau/whatsapp-business-sdk/issues/7)
+* **types:** 🐛 template message language ([9b2d716](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/9b2d716497cbe3a2da0b738d06c492281d8ea187))
+
 # [1.5.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.4.0...v1.5.0) (2023-02-07)
 
 
