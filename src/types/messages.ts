@@ -182,43 +182,132 @@ export type ContactMessageUrl = {
 };
 
 export type InteractiveActionSection = {
-	title: string;
+	/**
+	 * Required for Multi-Product Messages.
+	 * Array of product objects. There is a minimum of 1 product per section and a maximum of 30 products across all sections.
+	 */
+	product_items: {
+		/**
+		 * Unique identifier of the product in a catalog.
+		 */
+		product_retailer_id: string;
+	};
+	/**
+	 * Required for List Messages.
+	 * Contains a list of rows. You can have a total of 10 rows across your sections.
+	 */
 	rows: {
+		/**
+		 * Maximum length: 200 characters
+		 */
 		id: string;
+		/**
+		 * Maximum length: 24 characters
+		 */
 		title: string;
-		description: string;
+		/**
+		 * Maximum length: 72 characters
+		 */
+		description?: string;
 	}[];
+	/**
+	 * Required if the message has more than one section.
+	 * Title of the section.
+	 *
+	 * Maximum length: 24 characters.
+	 */
+	title: string;
 };
 
 export type InteractiveMessageAction = {
 	/**
+	 * Required for List Messages.
 	 * Button content. It cannot be an empty string and must be unique within the message. Emojis are supported, markdown is not.
+	 *
+	 * Maximum length: 20 characters.
 	 */
-	button: string;
+	button?: string;
 	/**
 	 * Required for Reply Buttons.
+	 * You can have up to 3 buttons. You cannot have leading or trailing spaces when setting the ID.
 	 */
-	buttons: {
+	buttons?: {
 		type: "reply";
-		title: string;
-		id: string;
+		reply: {
+			/**
+			 * Button title. It cannot be an empty string and must be unique within the message. Emojis are supported, markdown is not. Maximum length: 20 characters.
+			 */
+			title: string;
+			/**
+			 * Unique identifier for your button. This ID is returned in the webhook when the button is clicked by the user. Maximum length: 256 characters.
+			 */
+			id: string;
+		};
 	}[];
-	sections: InteractiveActionSection[];
+	/**
+	 * Required for Single Product Messages and Multi-Product Messages.
+	 * Unique identifier of the Facebook catalog linked to your WhatsApp Business Account. This ID can be retrieved via the Meta Commerce Manager.
+	 */
+	catalog_id?: string;
+	/**
+	 * Required for Single Product Messages and Multi-Product Messages.
+	 * Unique identifier of the product in a catalog.
+	 *
+	 * To get this ID go to Meta Commerce Manager and select your Meta Business account.
+	 */
+	product_retailer_id?: string;
+	/**
+	 * Required for List Messages and Multi-Product Messages.
+	 * Array of section objects. Minimum of 1, maximum of 10/
+	 */
+	sections?: InteractiveActionSection[];
 };
 
 export type InteractiveMessageBody = {
+	/**
+	 * Required if body is present. The content of the message. Emojis and markdown are supported. Maximum length: 1024 characters.
+	 */
 	text: string;
 };
 
 export type InteractiveMessageFooter = {
+	/**
+	 * Required if footer is present. The footer content. Emojis, markdown, and links are supported. Maximum length: 60 characters.
+	 */
 	text: string;
 };
 
 export type InteractiveMessageHeader = {
+	/**
+	 * The header type you would like to use. Supported values:
+	 * 
+	 * text: Used for List Messages, Reply Buttons, and Multi-Product Messages.
+	 * video: Used for Reply Buttons.
+	 * image: Used for Reply Buttons.
+	 * document: Used for Reply Buttons.
+
+	 */
 	type: "text" | "video" | "message" | "document";
+	/**
+	 * Required if type is set to text.
+	 * Text for the header. Formatting allows emojis, but not markdown.
+	 *
+	 * Maximum length: 60 characters.
+	 */
 	text?: string;
+	/**
+	 * Required if type is set to video. Contains the media object for this video.
+	 */
 	video?: MediaObject;
+	/**
+	 * Required if type is set to image.
+	 * Contains the media object for this image.
+	 */
 	image?: MediaObject;
+	/**
+	 * Required if type is set to document.
+	 * Contains the media object for this document.
+	 */
 	document?: MediaObject;
 };
 
@@ -228,20 +317,20 @@ export type InteractiveMessage = {
 	 */
 	action: InteractiveMessageAction;
 	/**
-	 * The body of the message. Emojis and markdown are supported.
-	   Maximum length: 1024 characters.
+	 * The body of the message. Optional for type product. Required for other message types.
 	 */
-	body: InteractiveMessageBody;
+	body?: InteractiveMessageBody;
 	/**
 	 * The footer of the message. Emojis and markdown are supported.
 	 * Maximum length: 60 characters.
 	 */
 	footer?: InteractiveMessageFooter;
 	/**
-	 * Header content displayed on top of a message.
+	 * Required for type product_list. Optional for other types.
+	 * Header content displayed on top of a message. You cannot set a header if your interactive object is of product type.
 	 */
 	header?: InteractiveMessageHeader;
-	type: "list" | "button";
+	type: "list" | "button" | "product" | "product_list";
 };
 
 export type ContactMessage = {
