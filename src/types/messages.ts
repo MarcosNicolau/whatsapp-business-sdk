@@ -1,3 +1,4 @@
+import { SupportedLanguagesCodeUnion } from "./languageCodes";
 import { GenerateMappedNever, LiteralUnion } from "./utils";
 
 export type SendMessageResponse = {
@@ -235,11 +236,15 @@ export type InteractiveMessageAction = {
 		type: "reply";
 		reply: {
 			/**
-			 * Button title. It cannot be an empty string and must be unique within the message. Emojis are supported, markdown is not. Maximum length: 20 characters.
+			 * Button title. It cannot be an empty string and must be unique within the message. Emojis are supported, markdown is not.
+			 *
+			 *  Maximum length: 20 characters.
 			 */
 			title: string;
 			/**
-			 * Unique identifier for your button. This ID is returned in the webhook when the button is clicked by the user. Maximum length: 256 characters.
+			 * Unique identifier for your button. This ID is returned in the webhook when the button is clicked by the user.
+			 *
+			 * Maximum length: 256 characters.
 			 */
 			id: string;
 		};
@@ -418,16 +423,16 @@ export type TemplateMessageLanguage = {
 	/**
 	 * The language policy the message should follow. See Language Policy Options for more information.
 	 */
-	policy: LiteralUnion<"deterministic">;
+	policy: "deterministic";
 	/**
 	 * The code of the language or locale to use. Accepts both language and language_locale formats (e.g., en and en_US).
 	 */
-	code: string;
+	code: SupportedLanguagesCodeUnion;
 };
 
 export type TemplateMessage = {
 	name: string;
-	language: string;
+	language: TemplateMessageLanguage;
 	components: TemplateMessageComponent[];
 };
 
