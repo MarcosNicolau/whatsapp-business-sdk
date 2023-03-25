@@ -1,6 +1,6 @@
 import { WABAErrorCodes } from "./error";
 import { LiteralUnion } from "./utils";
-import { MessageType } from "./messages";
+import { MessageType, ReactionMessage } from "./messages";
 
 /**
  * The information for the customer who sent a message to the business
@@ -241,6 +241,10 @@ export type WebhookMessage = {
 	 * When messages type is set to video.
 	 */
 	video?: WebhookMedia;
+	/**
+	 * When messages type is set to reaction.
+	 */
+	reaction?: ReactionMessage;
 };
 
 /**
