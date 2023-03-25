@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.1...v1.5.2) (2023-03-25)
+
+
+### Bug Fixes
+
+* **types:** 🐛 webhook reaction message ([af2cdb1](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/af2cdb10f69976a00966227a829c83fe0e8d7675)), closes [#8](https://github.com/MarcosNicolau/whatsapp-business-sdk/issues/8)
+
 ## [1.5.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.0...v1.5.1) (2023-03-18)
 
 
