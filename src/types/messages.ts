@@ -292,7 +292,7 @@ export type InteractiveMessageHeader = {
 	 * document: Used for Reply Buttons.
 
 	 */
-	type: "text" | "video" | "message" | "document";
+	type: "text" | "video" | "image" | "document";
 	/**
 	 * Required if type is set to text.
 	 * Text for the header. Formatting allows emojis, but not markdown.
