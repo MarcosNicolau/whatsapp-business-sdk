@@ -431,6 +431,7 @@ export type TemplateMessageLanguage = {
 };
 
 export type TemplateMessage = {
+	namespace: string;
 	name: string;
 	language: TemplateMessageLanguage;
 	components: TemplateMessageComponent[];
