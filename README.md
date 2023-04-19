@@ -227,12 +227,4 @@ This project uses typescript. Resources are stored in 2 key structures:
 
 Contributions are encouraged, I will review any incoming pull requests.
 
-### Donations
-
-If you found this project interesting or useful, you can give this project a star. Thank you!
-
-Or buy me a coffee using any of these:
-
--   BTC: `1MjRd2YNNjEx3ze1Y71UNSgbAF9XECKTP1`
--   ETH: `0xde25d72e9e87513b9c8dad8de11e2d8332276c7e`
--   USDC:`0xde25d72e9e87513b9c8dad8de11e2d8332276c7e`
+If you found this project interesting or useful, you would help so much by giving this project a star. Thank you!
