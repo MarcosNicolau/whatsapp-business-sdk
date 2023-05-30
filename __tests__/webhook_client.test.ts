@@ -120,14 +120,16 @@ describe("Webhook Client tests", () => {
 		const body = webhookBody;
 		const fields = webhookBodyFields;
 		const contact = body.entry[0].changes[0].value.contacts[0];
+		const metadata = body.entry[0].changes[0].value.metadata;
+
 		webhookHandler(body, events);
 		expect(events.onMessageReceived).toHaveBeenCalledTimes(2);
 		expect(events.onError).toHaveBeenCalledTimes(2);
 		expect(events.onStatusReceived).toHaveBeenCalledTimes(2);
 		expect(events.onTextMessageReceived).toHaveBeenCalledTimes(1);
-		expect(events.onMessageReceived).toHaveBeenCalledWith(fields.message, contact);
-		expect(events.onTextMessageReceived).toHaveBeenCalledWith(fields.textMessage, contact);
+		expect(events.onMessageReceived).toHaveBeenCalledWith(fields.message, contact, metadata);
+		expect(events.onTextMessageReceived).toHaveBeenCalledWith(fields.textMessage, contact, metadata);
 		expect(events.onError).toHaveBeenCalledWith(fields.error);
-		expect(events.onStatusReceived).toHaveBeenCalledWith(fields.status);
+		expect(events.onStatusReceived).toHaveBeenCalledWith(fields.status, metadata);
 	});
 });

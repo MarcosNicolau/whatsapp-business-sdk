@@ -18,7 +18,7 @@ export const webhookHandler = (
 				//The contact is always the 0 and it is only received when there the messages field is present
 				const contact = change?.value?.contacts[0];
 				//Call message event
-				onMessageReceived && onMessageReceived(message, contact);
+				onMessageReceived && onMessageReceived(message, contact, change?.value?.metadata);
 				//If the message is type of text, then call the respective event
 				if (message.type === "text" && message.text)
 					onTextMessageReceived &&
@@ -30,12 +30,13 @@ export const webhookHandler = (
 								from: message.from,
 								timestamp: message.timestamp,
 							},
-							contact
+							contact,
+							change?.value?.metadata,
 						);
 			});
 			//Call status event
 			change?.value?.statuses?.forEach((status) => {
-				onStatusReceived && onStatusReceived(status);
+				onStatusReceived && onStatusReceived(status, change?.value?.metadata);
 			});
 			//Call error event
 			change?.value?.errors?.forEach((err) => onError && onError(err));
