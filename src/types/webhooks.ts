@@ -1,6 +1,6 @@
 import { WABAErrorCodes } from "./error";
-import { LiteralUnion } from "./utils";
 import { MessageType, ReactionMessage } from "./messages";
+import { LiteralUnion } from "./utils";
 
 /**
  * The information for the customer who sent a message to the business
@@ -324,13 +324,15 @@ export type WebhookStatus = {
 	timestamp: number;
 };
 
+export type WebhookMetadata = {
+	display_phone_number: string;
+	phone_number_id: string;
+}
+
 export type WebhookChange = {
 	value: {
 		messaging_product: "whatsapp";
-		metadata: {
-			display_phone_number: string;
-			phone_number_id: string;
-		};
+		metadata: WebhookMetadata,
 		errors: WebhookError[];
 		contacts: WebhookContact[];
 		messages?: WebhookMessage[];
@@ -362,19 +364,20 @@ export type WebhookEvents = {
 	/**
 	 * This event gets fired on any webhooks messages, you'll have to differentiate between the message type
 	 */
-	onMessageReceived?: (payload: WebhookMessage, contact: WebhookContact) => void;
+	onMessageReceived?: (payload: WebhookMessage, contact: WebhookContact, metadata?: WebhookMetadata) => void;
 	/**
 	 * Gets fired when the received message is type of text
 	 */
 	onTextMessageReceived?: (
 		textMessage: Pick<WebhookMessage, "type" | "timestamp" | "text" | "from" | "id">,
-		contact: WebhookContact
+		contact: WebhookContact,
+		metadata?: WebhookMetadata
 	) => void;
 	/**
 	 * Gets triggered when a message is sent or delivered to a customer
 	 * or the customer reads the delivered message sent by a business that is subscribed to the Webhooks.
 	 */
-	onStatusReceived?: (payload: WebhookStatus) => void;
+	onStatusReceived?: (payload: WebhookStatus, metadata?: WebhookMetadata) => void;
 	/**
 	 * Gets fired whenever there is an err
 	 */
