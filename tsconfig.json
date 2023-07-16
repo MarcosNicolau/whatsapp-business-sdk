@@ -18,8 +18,8 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"typeRoots": ["./src/types"],
-		"types": ["@types/jest", "jest"]
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"types": ["jest"]
 	},
 	"include": ["src/**/*", "package.json"]
 }

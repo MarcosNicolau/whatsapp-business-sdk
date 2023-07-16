@@ -50,7 +50,6 @@ describe("create rest client", () => {
 			baseURL: "hola",
 		};
 		const restClient = createRestClient(args);
-		//@ts-expect-error authorization header is present
 		expect(restClient.fetch.defaults.headers.authorization).toBe("Bearer 123456");
 		expect(restClient.fetch.defaults.baseURL).toBe("hola");
 	});

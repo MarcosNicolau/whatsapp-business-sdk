@@ -128,7 +128,11 @@ describe("Webhook Client tests", () => {
 		expect(events.onStatusReceived).toHaveBeenCalledTimes(2);
 		expect(events.onTextMessageReceived).toHaveBeenCalledTimes(1);
 		expect(events.onMessageReceived).toHaveBeenCalledWith(fields.message, contact, metadata);
-		expect(events.onTextMessageReceived).toHaveBeenCalledWith(fields.textMessage, contact, metadata);
+		expect(events.onTextMessageReceived).toHaveBeenCalledWith(
+			fields.textMessage,
+			contact,
+			metadata
+		);
 		expect(events.onError).toHaveBeenCalledWith(fields.error);
 		expect(events.onStatusReceived).toHaveBeenCalledWith(fields.status, metadata);
 	});

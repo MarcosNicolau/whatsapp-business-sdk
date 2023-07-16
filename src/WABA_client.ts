@@ -40,7 +40,7 @@ export class WABAClient {
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
-			baseURL: "https://graph.facebook.com/v16.0",
+			baseURL: "https://graph.facebook.com/v17.0",
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}
@@ -148,6 +148,17 @@ export class WABAClient {
 	}
 	async getSingleBusinessPhoneNumber(phoneNumberId: string) {
 		return this.restClient.get<BusinessPhoneNumber>(phoneNumberId);
+	}
+	/**
+	 * You may want us to verify a customer's identity before we deliver your message to them.
+	 * You can have us do this by enabling the identity change check setting on your business phone number.
+	 */
+	async updateIdentityCheckState(enable: boolean) {
+		return this.restClient.post<DefaultResponse>(`${this.phoneId}/settings`, {
+			user_identity_change: {
+				enable_identity_check: enable,
+			},
+		});
 	}
 	async requestPhoneNumberVerificationCode({
 		phoneNumberId,
