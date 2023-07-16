@@ -7,7 +7,7 @@ export type SendMessageResponse = {
 		{
 			input: string;
 			wa_id: string;
-		}
+		},
 	];
 	messages: [
 		{
@@ -15,7 +15,7 @@ export type SendMessageResponse = {
 			 * Use the id to track your message status.
 			 */
 			id: string;
-		}
+		},
 	];
 };
 
@@ -222,6 +222,18 @@ export type InteractiveActionSection = {
 
 export type InteractiveMessageAction = {
 	/**
+	 * Required for catalog_messages
+	 */
+	name?: string;
+	/**
+	 * Item SKU number. Labeled as Content ID in the Commerce Manager.
+	 * The thumbnail of this item will be used as the message's header image.
+	 * If the parameters object is omitted, the product image of the first item in your catalog will be used.
+	 */
+	parameters?: {
+		thumbnail_product_retailer_id?: string;
+	};
+	/**
 	 * Required for List Messages.
 	 * Button content. It cannot be an empty string and must be unique within the message. Emojis are supported, markdown is not.
 	 *
@@ -330,12 +342,13 @@ export type InteractiveMessage = {
 	 * Maximum length: 60 characters.
 	 */
 	footer?: InteractiveMessageFooter;
+
 	/**
 	 * Required for type product_list. Optional for other types.
 	 * Header content displayed on top of a message. You cannot set a header if your interactive object is of product type.
 	 */
 	header?: InteractiveMessageHeader;
-	type: "list" | "button" | "product" | "product_list";
+	type: "list" | "button" | "product" | "product_list" | "catalog_message";
 };
 
 export type ContactMessage = {
@@ -391,7 +404,7 @@ export type TemplateMessageParameter = {
 
 //Adding never types to still have autocompletion when doing a union
 export type TemplateMessageButtonParameter = GenerateMappedNever<TemplateMessageParameter> & {
-	type: "payload" | "text";
+	type: "payload" | "text" | "catalog";
 	/**
 	 * required for quick_reply buttons
 	 * Developer-defined payload that is returned when the button is clicked in addition to the display text on the button.
@@ -433,6 +446,7 @@ export type TemplateMessageLanguage = {
 export type TemplateMessage = {
 	name: string;
 	language: TemplateMessageLanguage;
+	category: LiteralUnion<"AUTHENTICATION" | "MARKETING " | "UTILITY">;
 	components: TemplateMessageComponent[];
 };
 
