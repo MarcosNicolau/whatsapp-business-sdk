@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.2...v1.6.0) (2023-07-16)
+
+
+### Features
+
+* ✨ catalog messages and templates ([f4a0a5b](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f4a0a5bd5eaae48c0abec3735c4587f8233fac6d))
+* ✨ identity change check feature for cloud API ([b5b1d8e](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/b5b1d8e75a75930eb3fb3a44581be81466125988))
+* ✨ updated cloud API version ([5baff86](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/5baff86b4df1aa0e9983a02e12200bf46ee5366e))
+
 ## [1.5.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.1...v1.5.2) (2023-03-25)
 
 
