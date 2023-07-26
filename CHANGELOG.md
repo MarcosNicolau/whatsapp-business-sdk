@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.6.0...v1.7.0) (2023-07-26)
+
+
+### Features
+
+* ✨ documentation comments for the WABA client ([c98005a](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/c98005a3109d27e6829cc2ca2589846af42f41cd))
+
 # [1.6.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.2...v1.6.0) (2023-07-16)
 
 
