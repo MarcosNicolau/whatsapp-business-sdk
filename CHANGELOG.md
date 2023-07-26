@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.0...v1.7.1) (2023-07-26)
+
+
+### Bug Fixes
+
+* 🐛 update identity check endpoint ([40bdd2b](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/40bdd2b3885899bda677bc9f3a117644469975f1))
+
 # [1.7.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.6.0...v1.7.0) (2023-07-26)
 
 
