@@ -16,6 +16,10 @@ export type GetBusinessPhoneNumberResponse = {
 	};
 };
 
+export type UpdateIdentityCheckState = {
+	enable_identity_key_check: boolean;
+};
+
 export type RequestPhoneNumberVerificationCodePayload = {
 	code_method: "SMS" | "VOICE";
 	/**

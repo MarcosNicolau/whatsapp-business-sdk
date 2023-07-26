@@ -167,7 +167,7 @@ describe("WABA Cloud API endpoints", () => {
 		});
 
 		it("update identity check state", async () => {
-			const res = await client.updateIdentityCheckState(true);
+			const res = await client.updateIdentityCheckState({ enable_identity_key_check: false });
 			expectDefaultResponse(res);
 		});
 

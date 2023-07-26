@@ -20,6 +20,7 @@ import {
 	UploadMediaResponse,
 	MarkMessageAsReadPayload,
 	BusinessPhoneNumber,
+	UpdateIdentityCheckState,
 } from "./types";
 import { WABAErrorHandler } from "./utils/errorHandler";
 import { createRestClient } from "./utils/restClient";
@@ -190,10 +191,10 @@ export class WABAClient {
 	 * You may want us to verify a customer's identity before we deliver your message to them.
 	 * You can have us do this by enabling the identity change check setting on your business phone number.
 	 */
-	async updateIdentityCheckState(enable: boolean) {
+	async updateIdentityCheckState({ enable_identity_key_check }: UpdateIdentityCheckState) {
 		return this.restClient.post<DefaultResponse>(`${this.phoneId}/settings`, {
 			user_identity_change: {
-				enable_identity_check: enable,
+				enable_identity_key_check,
 			},
 		});
 	}
