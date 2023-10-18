@@ -317,7 +317,7 @@ export type WebhookStatus = {
 	 * The WhatsApp ID for the customer that the business, that is subscribed to the webhooks, sent to the customer
 	 */
 	recipient_id: string;
-	status: "delivered" | "read" | "sent";
+	status: "delivered" | "failed" | "read" | "sent";
 	/**
 	 * Date for the status message in unix
 	 */
