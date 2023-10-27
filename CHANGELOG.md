@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.1...v1.7.2) (2023-10-27)
+
+
+### Bug Fixes
+
+* **types:** TemplateMessage optional fields ([9293c58](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/9293c588e29e9084993508537d98198e183c00c8))
+
 ## [1.7.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.0...v1.7.1) (2023-07-26)
 
 

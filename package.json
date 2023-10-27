@@ -1,7 +1,7 @@
 {
 	"name": "whatsapp-business",
 	"author": "MarcosNicolau",
-	"version": "1.7.1",
+	"version": "1.7.2",
 	"description": "Node.js connector for the WhatsApp Business APIs with TypeScript support, integration tests and more.",
 	"license": "MIT",
 	"licenses": [
