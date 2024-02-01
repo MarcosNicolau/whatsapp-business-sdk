@@ -18,6 +18,10 @@ export type WebhookContact = {
 export type WebhookError = {
 	code: WABAErrorCodes;
 	title: string;
+	message: string;
+	error_data: {
+		details: string;
+	};
 };
 
 export type WebhookMedia = {
@@ -63,11 +67,11 @@ export type WebhookMessage = {
 		/**
 		 * The payload for a button set up by the business that a customer clicked as part of an interactive message
 		 */
-		payload: any;
+		payload: string;
 		text: string;
 	};
 	/**
-	 * When the messages type field is set to button, this object is included in the messages object. The context for a message that was forwarded or in an inbound reply from the customer.
+	 * Context object. Only included when a user replies or interacts with one of your messages. Context objects can have the following properties
 	 */
 	context?: {
 		/**
@@ -86,6 +90,13 @@ export type WebhookMessage = {
 		 * The message ID for the sent message for an inbound reply
 		 */
 		id: string;
+		/**
+		 * Referred product object describing the product the user is requesting information about. You must parse this value if you support Product Enquiry Messages
+		 */
+		referred_product: {
+			catalog_id: string;
+			product_retailer_id: string;
+		};
 	};
 	/**
 	 * When messages type is set to document.
@@ -95,6 +106,10 @@ export type WebhookMessage = {
 	 * The message that a business received from a customer is not a supported type.
 	 */
 	errors?: WebhookError[];
+	/**
+	 * The customer's WhatsApp ID. A business can respond to a customer using this ID.
+	 * This ID may not match the customer's phone number, which is returned by the API as input when sending a message to the customer.
+	 */
 	from: string;
 	/**
 	 * The ID for the message that was received by the business. You could use messages endpoint to mark it as read.
@@ -105,7 +120,6 @@ export type WebhookMessage = {
 	 */
 	identity?: {
 		acknowledged: boolean;
-		customer_identity_changed: boolean;
 		/**
 		 * The time when the WhatsApp Business Management API detected the customer may have changed their profile information
 		 */
@@ -148,7 +162,22 @@ export type WebhookMessage = {
 		};
 	};
 	/**
+	 * Included in the messages object when a customer has placed an order. Order objects have the following properties:
+	 */
+	order?: {
+		catalog_id: string;
+		text: string;
+		product_items: {
+			product_retailer_id: string;
+			quantity: string;
+			item_price: string;
+			currency: string;
+		}[];
+	};
+	/**
 	 * A customer clicked an ad that redirects them to WhatsApp.
+	 *
+	 * The referral object can be included in the following types of message: text, location, contact, image, video, document, voice, and sticker.
 	 */
 	referral?: {
 		/**
@@ -181,6 +210,7 @@ export type WebhookMessage = {
 		 * URL for the thumbnail, when media_type is a video
 		 */
 		thumbnail_url: string;
+		ctwa_clid: string;
 	};
 	/**
 	 * When messages type is set to sticker.
@@ -192,6 +222,10 @@ export type WebhookMessage = {
 		 *  ID for the sticker
 		 */
 		id: string;
+		/**
+		 *  Set to true if the sticker is animated; false otherwise.
+		 */
+		animated: boolean;
 	};
 	/**
 	 * When messages type is set to system, a customer has updated their phone number or profile information
@@ -256,26 +290,17 @@ export type WebhookStatus = {
 	 */
 	id: string;
 	/**
+	 * Arbitrary string included in sent message. See Message object.
+	 */
+	biz_opaque_callback_data: string;
+	/**
 	 * An object containing billing information.
 	 */
 	pricing: {
 		/**
 		 * Indicates the conversation pricing category
 		 */
-		category: {
-			/**
-			 * The business sent a message to a customer more than 24 hours after the last customer message
-			 */
-			business_initiated: boolean;
-			/**
-			 * The conversation originated from a free entry point. These conversations are always customer-initiated.
-			 */
-			referral_conversion: boolean;
-			/**
-			 * The business replied to a customer message within 24 hours of the last customer message
-			 */
-			customer_initiated: boolean;
-		};
+		category: "authentication" | "marketing" | "utility" | "service" | "referral_conversion";
 		/**
 		 *  Type of pricing model used by the business.
 		 */
@@ -293,25 +318,19 @@ export type WebhookStatus = {
 			/**
 			 * Indicates where a conversation has started. This can also be referred to as a conversation entry point
 			 */
-			type: {
-				/**
-				 * Indicates that the conversation started by a business sending the first message to a customer. This applies any time it has been more than 24 hours since the last customer message.
-				 */
-				business_initiated: boolean;
-				/**
-				 * Indicates that the conversation started by a business replying to a customer message. This applies only when the business reply is within 24 hours of the last customer message.
-				 */
-				customer_initiated: boolean;
-				/**
-				 * Indicates that the conversation originated from a free entry point. These conversations are always customer-initiated.
-				 */
-				referral_conversation: boolean;
-			};
+			type:
+				| "authentication"
+				| "marketing"
+				| "utility"
+				| "service"
+				| "business_initiated"
+				| "customer_initiated"
+				| "referral_conversation";
 			/**
 			 *  Date when the conversation expires. This field is only present for messages with a `status` set to `sent`
 			 */
-			expiration_timestamp: string;
 		};
+		expiration_timestamp: string;
 	};
 	/**
 	 * The WhatsApp ID for the customer that the business, that is subscribed to the webhooks, sent to the customer
@@ -327,12 +346,12 @@ export type WebhookStatus = {
 export type WebhookMetadata = {
 	display_phone_number: string;
 	phone_number_id: string;
-}
+};
 
 export type WebhookChange = {
 	value: {
 		messaging_product: "whatsapp";
-		metadata: WebhookMetadata,
+		metadata: WebhookMetadata;
 		errors: WebhookError[];
 		contacts: WebhookContact[];
 		messages?: WebhookMessage[];
@@ -352,7 +371,7 @@ export type Webhook = {
 		{
 			id: string;
 			changes: WebhookChange[];
-		}
+		},
 	];
 };
 
@@ -364,7 +383,11 @@ export type WebhookEvents = {
 	/**
 	 * This event gets fired on any webhooks messages, you'll have to differentiate between the message type
 	 */
-	onMessageReceived?: (payload: WebhookMessage, contact: WebhookContact, metadata?: WebhookMetadata) => void;
+	onMessageReceived?: (
+		payload: WebhookMessage,
+		contact: WebhookContact,
+		metadata?: WebhookMetadata
+	) => void;
 	/**
 	 * Gets fired when the received message is type of text
 	 */

@@ -53,6 +53,15 @@ export type Message = {
 	messaging_product: LiteralUnion<"whatsapp">;
 	recipient_type?: LiteralUnion<"individual">;
 	/**
+	 * An arbitrary string, useful for tracking.
+	 * For example, you could pass the message template ID in this field to track your customer's journey starting from the first message you send. You could then track the ROI of different message template types to determine the most effective one.
+	 * Any app subscribed to the messages webhook field on the WhatsApp Business Account can get this string, as it is included in statuses object within webhook payloads.
+	 * Cloud API does not process this field, it just returns it as part of sent/delivered/read message webhooks.
+	 * Maximum 512 characters.
+	 *
+	 */
+	biz_opaque_callback_data?: string;
+	/**
 	 * Use it if you want to use the reply-to feature when answering a message
 	 */
 	context?: MessageContext;
