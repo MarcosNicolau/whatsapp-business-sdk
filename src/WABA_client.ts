@@ -46,7 +46,7 @@ export class WABAClient {
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
-			baseURL: "https://graph.facebook.com/v17.0",
+			baseURL: "https://graph.facebook.com/v19.0",
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}
