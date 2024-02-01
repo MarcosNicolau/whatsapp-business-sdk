@@ -1,3 +1,33 @@
+## [1.7.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.1...v1.7.2) (2023-10-27)
+
+
+### Bug Fixes
+
+* **types:** TemplateMessage optional fields ([9293c58](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/9293c588e29e9084993508537d98198e183c00c8))
+
+## [1.7.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.0...v1.7.1) (2023-07-26)
+
+
+### Bug Fixes
+
+* 🐛 update identity check endpoint ([40bdd2b](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/40bdd2b3885899bda677bc9f3a117644469975f1))
+
+# [1.7.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.6.0...v1.7.0) (2023-07-26)
+
+
+### Features
+
+* ✨ documentation comments for the WABA client ([c98005a](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/c98005a3109d27e6829cc2ca2589846af42f41cd))
+
+# [1.6.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.2...v1.6.0) (2023-07-16)
+
+
+### Features
+
+* ✨ catalog messages and templates ([f4a0a5b](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f4a0a5bd5eaae48c0abec3735c4587f8233fac6d))
+* ✨ identity change check feature for cloud API ([b5b1d8e](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/b5b1d8e75a75930eb3fb3a44581be81466125988))
+* ✨ updated cloud API version ([5baff86](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/5baff86b4df1aa0e9983a02e12200bf46ee5366e))
+
 ## [1.5.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.5.1...v1.5.2) (2023-03-25)
 
 

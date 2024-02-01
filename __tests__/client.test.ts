@@ -165,58 +165,63 @@ describe("WABA Cloud API endpoints", () => {
 			const res = await client.getSingleBusinessPhoneNumber(args.phoneId);
 			expect(res).toEqual(businessPhone);
 		});
-	});
 
-	it("deregister phone", async () => {
-		const res = await client.deregisterPhone(args.phoneId);
-		expectDefaultResponse(res);
-	});
+		it("update identity check state", async () => {
+			const res = await client.updateIdentityCheckState({ enable_identity_key_check: false });
+			expectDefaultResponse(res);
+		});
 
-	it("request phone number verification code", async () => {
-		try {
-			const res = await client.requestPhoneNumberVerificationCode({
-				language: "en_US",
-				code_method: "SMS",
+		it("deregister phone", async () => {
+			const res = await client.deregisterPhone(args.phoneId);
+			expectDefaultResponse(res);
+		});
+
+		it("request phone number verification code", async () => {
+			try {
+				const res = await client.requestPhoneNumberVerificationCode({
+					language: "en_US",
+					code_method: "SMS",
+					phoneNumberId: args.phoneId,
+				});
+				expectDefaultResponse(res);
+			} catch (err) {
+				//This endpoints tends to fail
+				//So we match the error object
+				matchesWABAErrorObject(err);
+			}
+		});
+
+		it("verify phone number call", async () => {
+			try {
+				const res = await client.verifyPhoneNumberCode({
+					code: "123456",
+					phoneNumberId: args.phoneId,
+				});
+				expectDefaultResponse(res);
+			} catch (err) {
+				//We cant verify with the real code
+				//So we just make sure that the API call was made
+				expect(err).toMatchObject<Partial<WABAErrorAPI>>({
+					message: ERROR_CODES[136025],
+					code: 136025,
+				});
+			}
+		});
+
+		it("register phone", async () => {
+			const res = await client.registerPhone({
 				phoneNumberId: args.phoneId,
+				pin: "123456",
 			});
 			expectDefaultResponse(res);
-		} catch (err) {
-			//This endpoints tends to fail
-			//So we match the error object
-			matchesWABAErrorObject(err);
-		}
-	});
+		});
 
-	it("verify phone number call", async () => {
-		try {
-			const res = await client.verifyPhoneNumberCode({
-				code: "123456",
+		it("set up two step auth", async () => {
+			const res = await client.setupTwoStepAuth({
 				phoneNumberId: args.phoneId,
+				pin: "123456",
 			});
 			expectDefaultResponse(res);
-		} catch (err) {
-			//We cant verify with the real code
-			//So we just make sure that the API call was made
-			expect(err).toMatchObject<Partial<WABAErrorAPI>>({
-				message: ERROR_CODES[136025],
-				code: 136025,
-			});
-		}
-	});
-
-	it("register phone", async () => {
-		const res = await client.registerPhone({
-			phoneNumberId: args.phoneId,
-			pin: "123456",
 		});
-		expectDefaultResponse(res);
-	});
-
-	it("set up two step auth", async () => {
-		const res = await client.setupTwoStepAuth({
-			phoneNumberId: args.phoneId,
-			pin: "123456",
-		});
-		expectDefaultResponse(res);
 	});
 });

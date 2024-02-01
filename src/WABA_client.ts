@@ -20,6 +20,7 @@ import {
 	UploadMediaResponse,
 	MarkMessageAsReadPayload,
 	BusinessPhoneNumber,
+	UpdateIdentityCheckState,
 } from "./types";
 import { WABAErrorHandler } from "./utils/errorHandler";
 import { createRestClient } from "./utils/restClient";
@@ -30,6 +31,11 @@ interface WABAClientArgs {
 	accountId: string;
 }
 
+/**
+ * Connector for the Whatsapp Cloud API.
+ *
+ * documentation: https://developers.facebook.com/docs/whatsapp/cloud-api/guides
+ */
 export class WABAClient {
 	restClient: ReturnType<typeof createRestClient>;
 	phoneId: string;
@@ -47,12 +53,13 @@ export class WABAClient {
 
 	/*
 	 *
-	 *BUSINESS PROFILE ENDPOINTS
-	 *
+	 *BUSINESS PROFILE ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/reference/business-profiles)
 	 */
 	/**
 	 *
-	 * @param fields you can specify what you want to know from your business. If not passed, defaults to all fields
+	 * Retrieves your business profile. Customers can view your business profile by clicking your business's name or number in a conversation thread.
+	 *
+	 * @param fields you can specify which data you want to get from your business. If not passed, defaults to all fields.
 	 */
 	getBusinessProfile(fields?: BusinessProfileFieldsQuery) {
 		return this.restClient.get<BusinessProfile>(`${this.phoneId}/whatsapp_business_profile`, {
@@ -61,6 +68,9 @@ export class WABAClient {
 				"about,address,description,email,profile_picture_url,websites,vertical",
 		});
 	}
+	/**
+	 * @param payload provide the fields that you wish to update.
+	 */
 	updateBusinessProfile(payload: UpdateBusinessProfilePayload) {
 		return this.restClient.post<DefaultResponse, Partial<BusinessProfileFields>>(
 			`${this.phoneId}/whatsapp_business_profile`,
@@ -72,8 +82,13 @@ export class WABAClient {
 	}
 	/*
 	 *
-	 * MEDIA ENDPOINTS
+	 * MEDIA ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media)
 	 *
+	 */
+	/**
+	 * All media files sent through this endpoint are encrypted and persist for 30 days, unless they are deleted earlier.
+	 *
+	 * A successful response returns an object with the uploaded media's ID.
 	 */
 	uploadMedia({ file, type }: Omit<UploadMediaPayload, "messaging_product">) {
 		const formData = new FormData();
@@ -88,21 +103,25 @@ export class WABAClient {
 			}
 		);
 	}
-	getMedia(id: string) {
-		return this.restClient.get<GetMediaResponse>(id);
+	/**
+	 * Retrieves your media’s URL. Use the returned URL to download the media file. Note that clicking this URL (i.e. performing a generic GET) will not return the media; you must include an access token.
+	 *
+	 * A successful response includes an object with a media url. The URL is only valid for 5 minutes.
+	 */
+	getMedia(mediaId: string) {
+		return this.restClient.get<GetMediaResponse>(mediaId);
 	}
-	deleteMedia(id: string) {
-		return this.restClient.delete<DefaultResponse>(id);
+	deleteMedia(mediaId: string) {
+		return this.restClient.delete<DefaultResponse>(mediaId);
 	}
 	/**
-	 *
-	 * @param url your media’s URL
+	 * @param mediaUrl your media’s URL
 	 * @param pathToSaveFile the path where you want to store the media
 	 */
-	async downloadMedia(url: string, pathToSaveFile: string) {
+	async downloadMedia(mediaUrl: string, pathToSaveFile: string) {
 		try {
 			const response = await this.restClient.get(
-				url,
+				mediaUrl,
 				{},
 				{ baseURL: "", responseType: "stream" }
 			);
@@ -113,12 +132,26 @@ export class WABAClient {
 	}
 	/*
 	 *
-	 * MESSAGES ENDPOINTS
+	 * MESSAGES ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages)
 	 *
 	 */
 
 	/**
-	 * I suggest checking https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages to get some examples and understand how this endpoints works
+	 * Yu can use the API to send the following free-form messages types:
+	 * 	Text
+	 *	Reaction
+	 * 	Media
+	 * 	Location
+	 * 	Contacts
+	 * 	Interactive
+	 * 	Address
+	 * 	messages
+	 * 	template
+	 *
+	 * For more information refer here: https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages
+	 *
+	 * If you are working with template messages refer here: https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates
+	 *
 	 */
 	async sendMessage(payload: Omit<Message, "messaging_product">) {
 		return this.restClient.post<SendMessageResponse, Message>(`${this.phoneId}/messages`, {
@@ -126,6 +159,11 @@ export class WABAClient {
 			messaging_product: "whatsapp",
 		});
 	}
+	/**
+	 * When you receive an incoming message from Webhooks,
+	 * you can use the /messages endpoint to mark the message as
+	 * read by changing its status to read. Messages marked as read display two blue check marks alongside their timestamp.
+	 */
 	async markMessageAsRead(message_id: string) {
 		return this.restClient.post<DefaultResponse, MarkMessageAsReadPayload>(
 			`${this.phoneId}/messages`,
@@ -138,7 +176,7 @@ export class WABAClient {
 	}
 	/*
 	 *
-	 *	PHONE NUMBERS ENDPOINTS
+	 *	PHONE NUMBERS ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/reference/phone-numbers)
 	 *
 	 */
 	async getBusinessPhoneNumbers() {
@@ -153,10 +191,10 @@ export class WABAClient {
 	 * You may want us to verify a customer's identity before we deliver your message to them.
 	 * You can have us do this by enabling the identity change check setting on your business phone number.
 	 */
-	async updateIdentityCheckState(enable: boolean) {
+	async updateIdentityCheckState({ enable_identity_key_check }: UpdateIdentityCheckState) {
 		return this.restClient.post<DefaultResponse>(`${this.phoneId}/settings`, {
 			user_identity_change: {
-				enable_identity_check: enable,
+				enable_identity_key_check,
 			},
 		});
 	}

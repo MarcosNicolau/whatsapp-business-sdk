@@ -446,8 +446,8 @@ export type TemplateMessageLanguage = {
 export type TemplateMessage = {
 	name: string;
 	language: TemplateMessageLanguage;
-	category: LiteralUnion<"AUTHENTICATION" | "MARKETING " | "UTILITY">;
-	components: TemplateMessageComponent[];
+	category?: LiteralUnion<"AUTHENTICATION" | "MARKETING " | "UTILITY">;
+	components?: TemplateMessageComponent[];
 };
 
 export type TextMessage = {
