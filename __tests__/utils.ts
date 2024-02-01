@@ -58,28 +58,21 @@ export const webhookBodyFields: {
 		conversation: {
 			id: "",
 			origin: {
-				expiration_timestamp: "",
-				type: {
-					business_initiated: false,
-					customer_initiated: true,
-					referral_conversation: false,
-				},
+				type: "authentication",
 			},
+			expiration_timestamp: "",
 		},
 		id: "",
 		pricing: {
-			category: {
-				business_initiated: false,
-				customer_initiated: true,
-				referral_conversion: false,
-			},
+			category: "authentication",
 			pricing_model: "",
 		},
+		biz_opaque_callback_data: "",
 		recipient_id: "",
 		status: "read",
 		timestamp: 465,
 	},
-	error: { code: 2, title: "ERR" },
+	error: { code: 2, title: "ERR", message: "ERR", error_data: { details: "" } },
 };
 
 export const webhookBody: Webhook = {
