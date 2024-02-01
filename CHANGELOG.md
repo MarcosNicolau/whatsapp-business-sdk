@@ -1,3 +1,13 @@
+# [1.8.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.2...v1.8.0) (2024-02-01)
+
+
+### Features
+
+* ✨ graph endpoint version ([615f7a4](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/615f7a40a5646ac87a539940ba62ae9fa168b48a))
+* ✨ health status endpoints ([2a97962](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/2a97962bc557ebf5eea6939875db7fc3a2a8e7b9))
+* ✨ interactive messages (flow, catalog, send location request) ([907f268](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/907f26829362b7de60295a92e2bfd6d8547e986f))
+* ✨ updated webhook payload and added the new biz_opaque_callback_data field ([655628c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/655628c410e08f99216b2a4da18a22f84c9d1024))
+
 ## [1.7.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.1...v1.7.2) (2023-10-27)
 
 
