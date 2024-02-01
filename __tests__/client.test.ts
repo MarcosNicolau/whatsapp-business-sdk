@@ -224,4 +224,23 @@ describe("WABA Cloud API endpoints", () => {
 			expectDefaultResponse(res);
 		});
 	});
+
+	describe("health endpoints", () => {
+		it("health status", async () => {
+			const res = await client.getHealthStatus("100799079318472");
+			expect(res).toEqual({
+				health_status: expect.objectContaining({
+					can_send_message: expect.any(String),
+					entities: expect.arrayContaining([
+						expect.objectContaining({
+							id: expect.any(String),
+							entity_type: expect.any(String),
+							can_send_message: expect.any(String),
+						}),
+					]),
+				}),
+				id: expect.any(String),
+			});
+		});
+	});
 });

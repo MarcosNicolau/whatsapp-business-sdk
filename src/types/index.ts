@@ -7,3 +7,4 @@ export * from "./phoneNumbers";
 export * from "./registration";
 export * from "./response";
 export * from "./webhooks";
+export * from "./healthStatus";

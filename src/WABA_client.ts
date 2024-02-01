@@ -21,6 +21,7 @@ import {
 	MarkMessageAsReadPayload,
 	BusinessPhoneNumber,
 	UpdateIdentityCheckState,
+	HealthStatusResponse,
 } from "./types";
 import { WABAErrorHandler } from "./utils/errorHandler";
 import { createRestClient } from "./utils/restClient";
@@ -221,5 +222,17 @@ export class WABAClient {
 	}
 	async setupTwoStepAuth({ phoneNumberId, ...payload }: SetUpTwoFactorAuthArgs) {
 		return this.restClient.post<DefaultResponse>(phoneNumberId, payload);
+	}
+	/*
+	 *
+	 *	HEALTH ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/health-status)
+	 *
+	 */
+	/**
+	 *
+	 * @param nodeId is optional, defaults to the account_id
+	 */
+	async getHealthStatus(nodeId?: string) {
+		return this.restClient.get<HealthStatusResponse>(`${this.accountId}?fields=health_status`);
 	}
 }
