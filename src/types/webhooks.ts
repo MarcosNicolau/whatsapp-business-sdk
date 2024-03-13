@@ -114,7 +114,7 @@ export type WebhookMessage = {
 	/**
 	 * The ID for the message that was received by the business. You could use messages endpoint to mark it as read.
 	 */
-	id: number;
+	id: string;
 	/**
 	 * A webhook is triggered when a customer's phone number or profile information has been updated.
 	 */
