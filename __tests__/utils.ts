@@ -39,7 +39,7 @@ export const webhookBodyFields: {
 	textMessage: {
 		type: "text",
 		from: "",
-		id: 32,
+		id: "32",
 		timestamp: 21,
 		text: {
 			body: "Hi",
@@ -48,7 +48,7 @@ export const webhookBodyFields: {
 	message: {
 		type: "audio",
 		from: "",
-		id: 32,
+		id: "32",
 		timestamp: 21,
 		text: {
 			body: "Hi",
