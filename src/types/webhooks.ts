@@ -137,30 +137,29 @@ export type WebhookMessage = {
 	 * When a customer selected a button or list reply.
 	 */
 	interactive?: {
-		type: {
-			/**
-			 * Sent when a customer clicks a button
-			 */
-			button_reply?: {
-				/**
-				 *  Unique ID of a button
-				 */
-				id: string;
-				title: string;
-			};
-			/**
-			 *  Sent when a customer selects an item from a list
-			 */
-			list_reply?: {
-				/**
-				 * Unique ID of the selected list item
-				 */
-				id: string;
-				title: string;
-				description: string;
-			};
-		};
-	};
+		type: string;
+	    /**
+	     * Sent when a customer clicks a button
+	     */
+	    button_reply?: {
+	      /**
+	       *  Unique ID of a button
+	       */
+	      id: string;
+	      title: string;
+	    };
+	    /**
+	     *  Sent when a customer selects an item from a list
+	     */
+	    list_reply?: {
+	      /**
+	       * Unique ID of the selected list item
+	       */
+	      id: string;
+	      title: string;
+	      description: string;
+	    };
+	  };
 	/**
 	 * Included in the messages object when a customer has placed an order. Order objects have the following properties:
 	 */
