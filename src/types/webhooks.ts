@@ -32,8 +32,8 @@ export type WebhookMedia = {
 	/**
 	 * Name for the file on the sender's device
 	 */
-	filename: string;
-	ha256: string;
+	filename?: string;
+	sha256: string;
 	mime_type: string;
 	/**
 	 * ID for the file
@@ -52,7 +52,7 @@ export type WebhookMessage = {
 	/**
 	 * The time when the customer sent the message to the business in unix format
 	 */
-	timestamp: number;
+	timestamp: number | string;
 	/**
 	 * When the messages type is set to audio, including voice messages, this object is included in the messages object:
 	 */
@@ -351,7 +351,7 @@ export type WebhookChange = {
 	value: {
 		messaging_product: "whatsapp";
 		metadata: WebhookMetadata;
-		errors: WebhookError[];
+		errors?: WebhookError[];
 		contacts: WebhookContact[];
 		messages?: WebhookMessage[];
 		statuses?: WebhookStatus[];
