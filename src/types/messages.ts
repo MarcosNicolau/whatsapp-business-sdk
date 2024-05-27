@@ -196,7 +196,7 @@ export type InteractiveActionSection = {
 	 * Required for Multi-Product Messages.
 	 * Array of product objects. There is a minimum of 1 product per section and a maximum of 30 products across all sections.
 	 */
-	product_items: {
+	product_items?: {
 		/**
 		 * Unique identifier of the product in a catalog.
 		 */
@@ -206,7 +206,7 @@ export type InteractiveActionSection = {
 	 * Required for List Messages.
 	 * Contains a list of rows. You can have a total of 10 rows across your sections.
 	 */
-	rows: {
+	rows?: {
 		/**
 		 * Maximum length: 200 characters
 		 */
@@ -226,7 +226,7 @@ export type InteractiveActionSection = {
 	 *
 	 * Maximum length: 24 characters.
 	 */
-	title: string;
+	title?: string;
 };
 
 /**
