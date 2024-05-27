@@ -1,3 +1,11 @@
+## [1.8.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.0...v1.8.1) (2024-05-27)
+
+
+### Bug Fixes
+
+* 🐛 interactive message optional fields ([de9662d](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/de9662d4a4709b53174022af5fbd425cb1b6b47a)), closes [#30](https://github.com/MarcosNicolau/whatsapp-business-sdk/issues/30)
+* 🐛 webhook timestamp type ([bc6f579](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/bc6f57908bfdf011fcbbf58e176d393d5edf2b71))
+
 # [1.8.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.7.2...v1.8.0) (2024-02-01)
 
 
