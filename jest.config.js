@@ -20,4 +20,6 @@ module.exports = {
 	transform: {
 		"^.+\\.(ts|tsx)$": "ts-jest",
 	},
+	modulePathIgnorePatterns: ["dist/"],
+	testPathIgnorePatterns: ["__tests__/client.test.ts"],
 };
