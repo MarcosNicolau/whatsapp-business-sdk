@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.1...v1.8.2) (2024-05-29)
+
+
+### Bug Fixes
+
+* 🐛 message.ts ([eed637c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/eed637c5d294447fa235d7f5e6051301f5c5e03e)), closes [#32](https://github.com/MarcosNicolau/whatsapp-business-sdk/issues/32)
+
 ## [1.8.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.0...v1.8.1) (2024-05-27)
 
 
