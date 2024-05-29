@@ -159,6 +159,14 @@ export type WebhookMessage = {
 			title: string;
 			description: string;
 		};
+		/**
+		 *  Sent when a user submits a flow
+		 */
+		nfm_reply?: {
+		    body: string;
+		    name: string;
+		    response_json: string;
+		};	
 	};
 	/**
 	 * Included in the messages object when a customer has placed an order. Order objects have the following properties:
