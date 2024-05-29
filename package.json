@@ -22,7 +22,7 @@
 	"scripts": {
 		"build": "tsc",
 		"test": "jest",
-		"prepare": "tsc --build",
+		"prepare": "husky && tsc --build",
 		"cm": "cz"
 	},
 	"repository": {
