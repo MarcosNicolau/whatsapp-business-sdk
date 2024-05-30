@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.9.0...v1.10.0) (2024-05-30)
+
+
+### Features
+
+* ✨ added support for cta_url interactive message type ([2e43fcb](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/2e43fcb29feee98be81f647d2c5076680325641a))
+
 # [1.9.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.2...v1.9.0) (2024-05-30)
 
 
