@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.2...v1.9.0) (2024-05-30)
+
+
+### Features
+
+* ✨ added nfm_reply typings to webhooks ([8cbdebe](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/8cbdebe208a7a386aebec50d7e3d482008ba8a87))
+
 ## [1.8.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.8.1...v1.8.2) (2024-05-29)
 
 
