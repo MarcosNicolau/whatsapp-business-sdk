@@ -244,7 +244,14 @@ export type InteractiveMessageAction = {
 	 */
 	parameters?: {
 		thumbnail_product_retailer_id?: string;
-
+		/**
+		 * Required for Call-to-Action URL Button Messages.
+		 */
+		display_text?: string;
+		/**
+		 * Required for Call-to-Action URL Button Messages.
+		 */
+    		url?: string;
 		/**
 		 * Optional for Flows Messages.
 		 *
@@ -420,7 +427,8 @@ export type InteractiveMessage = {
 		| "product_list"
 		| "catalog_message"
 		| "flow"
-		| "location_request_message";
+		| "location_request_message"
+		| "cta_url";
 };
 
 export type ContactMessage = {
