@@ -71,7 +71,7 @@ export type WebhookMessage = {
 		text: string;
 	};
 	/**
-	 * When the messages type field is set to contacts, this object is included in the messages object:
+	 * When the messages type field is set to contact, this object is included in the messages object:
 	 */
 	contacts?: [
 		{
@@ -211,6 +211,16 @@ export type WebhookMessage = {
 			response_json: string;
 		};
 	};
+	/**
+	 * When the messages type field is set to location, this object is included in the messages object:
+	 */
+	location?: {
+		latitude: string;
+		longitude: string;
+		name?: string;
+		address?: string;
+	};
+
 	/**
 	 * Included in the messages object when a customer has placed an order. Order objects have the following properties:
 	 */
