@@ -36,7 +36,8 @@ export type MessageType =
 	| "template"
 	| "text"
 	| "video"
-	| "reaction";
+	| "reaction"
+	| "request_welcome";
 
 export type MessageContext = {
 	/**
@@ -251,7 +252,7 @@ export type InteractiveMessageAction = {
 		/**
 		 * Required for Call-to-Action URL Button Messages.
 		 */
-    		url?: string;
+		url?: string;
 		/**
 		 * Optional for Flows Messages.
 		 *
