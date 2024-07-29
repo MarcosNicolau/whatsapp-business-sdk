@@ -251,7 +251,7 @@ export type InteractiveMessageAction = {
 		/**
 		 * Required for Call-to-Action URL Button Messages.
 		 */
-    		url?: string;
+		url?: string;
 		/**
 		 * Optional for Flows Messages.
 		 *
