@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.10.0...v1.11.0) (2024-07-29)
+
+
+### Features
+
+* ✨ added location object types to webhooks ([38e86ab](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/38e86ab48c54255ba39e3a7d80d1d01c086f09c5))
+* ✨ added request_welcome as message type ([3320d28](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/3320d28a4ff4f062bc631cf28b6dcd5ff3ae5efe))
+
 # [1.10.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.9.0...v1.10.0) (2024-05-30)
 
 
