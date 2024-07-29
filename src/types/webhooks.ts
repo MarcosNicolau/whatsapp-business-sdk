@@ -71,6 +71,49 @@ export type WebhookMessage = {
 		text: string;
 	};
 	/**
+	 * When the messages type field is set to contacts, this object is included in the messages object:
+	 */
+	contacts?: [
+		{
+			addresses?: {
+				city?: string;
+				country?: string;
+				country_code?: string;
+				state?: string;
+				street?: string;
+				type?: string;
+				zip?: string;
+			}[];
+			birthday?: string;
+			emails?: {
+				email: string;
+				type?: string;
+			}[];
+			name?: {
+				formatted_name?: string;
+				first_name?: string;
+				last_name?: string;
+				middle_name?: string;
+				suffix?: string;
+				prefix?: string;
+			};
+			org?: {
+				company?: string;
+				department?: string;
+				title?: string;
+			};
+			phones?: {
+				phone: string;
+				wa_id?: string;
+				type?: string;
+			}[];
+			urls?: {
+				url: string;
+				type?: string;
+			}[];
+		},
+	];
+	/**
 	 * Context object. Only included when a user replies or interacts with one of your messages. Context objects can have the following properties
 	 */
 	context?: {
@@ -163,9 +206,9 @@ export type WebhookMessage = {
 		 *  Sent when a user submits a flow
 		 */
 		nfm_reply?: {
-		    body: string;
-		    name: string;
-		    response_json: string;
+			body: string;
+			name: string;
+			response_json: string;
 		};
 	};
 	/**
