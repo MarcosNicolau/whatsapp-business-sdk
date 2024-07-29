@@ -48,7 +48,7 @@ export type WebhookMessage = {
 	/**
 	 * The type of message that has been received by the business that has subscribed to Webhooks.
 	 */
-	type: MessageType | "system" | "unknown";
+	type: MessageType | "system" | "unknown" | "request_welcome";
 	/**
 	 * The time when the customer sent the message to the business in unix format
 	 */
