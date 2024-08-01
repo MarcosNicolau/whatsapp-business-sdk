@@ -41,6 +41,8 @@ export type WebhookMedia = {
 	id: string;
 };
 
+type SharedMessageTypes = Exclude<MessageType, "contacts" | "location" | "template" | "reaction">;
+
 /**
  * For more information about this object, go here https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components#messages-object
  */
@@ -48,7 +50,7 @@ export type WebhookMessage = {
 	/**
 	 * The type of message that has been received by the business that has subscribed to Webhooks.
 	 */
-	type: MessageType | "system" | "unknown" | "request_welcome";
+	type: SharedMessageTypes | "system" | "unknown" | "button" | "order";
 	/**
 	 * The time when the customer sent the message to the business in unix format
 	 */
