@@ -1,5 +1,5 @@
 import { SupportedLanguagesCodeUnion } from "./languageCodes";
-import { GenerateMappedNever, LiteralUnion } from "./utils";
+import { LiteralUnion } from "./utils";
 
 export type SendMessageResponse = {
 	messaging_product: "whatsapp";
@@ -455,7 +455,7 @@ export type LocationMessage = {
 };
 
 export type TemplateMessageParameter = {
-	type: "text" | "currency" | "date_time" | "image" | "document" | "video";
+	type: "text" | "currency" | "date_time" | "image" | "document" | "video" | "location";
 	/**
 	 * required for type=text
 	 * The message’s text. Character limit varies based on the following included component type.
@@ -494,39 +494,51 @@ export type TemplateMessageParameter = {
 	image?: MediaObject;
 	document?: MediaObject;
 	video?: MediaObject;
+	location?: LocationMessage;
 };
 
 //Adding never types to still have autocompletion when doing a union
-export type TemplateMessageButtonParameter = GenerateMappedNever<TemplateMessageParameter> & {
-	type: "payload" | "text";
-	/**
-	 * required for quick_reply buttons
-	 * Developer-defined payload that is returned when the button is clicked in addition to the display text on the button.
-	 */
-	payload?: any;
-	/**
-	 * required for url buttons
-	 */
-	text?: string;
-};
+export type TemplateMessageButtonParameter =
+	| {
+			type: "payload";
+			/**
+			 * required for quick_reply buttons
+			 * Developer-defined payload that is returned when the button is clicked in addition to the display text on the button.
+			 */
+			payload: any;
+	  }
+	| {
+			type: "text";
+			/**
+			 * required for url buttons
+			 */
+			text: string;
+	  };
 
-export type TemplateMessageComponent = {
-	type: "header" | "body" | "button";
+type TemplateButtonComponent = {
+	type: "button";
 	/**
 	 * required when type=button
 	 */
-	sub_type?: "quick_reply" | "url" | "catalog";
+	sub_type: "quick_reply" | "url" | "catalog";
 	/**
 	 * required when type=button
 	 */
-	parameters?: TemplateMessageButtonParameter[] | TemplateMessageParameter[];
+	parameters: TemplateMessageButtonParameter[];
 	/**
 	 * required when type=button
 	 *
 	 * Position index of the button. You can have up to 10 buttons using index values of 0 to 9.
 	 */
-	index?: number;
+	index: number;
 };
+
+type RawTemplateMessageComponent = {
+	type: "header" | "body";
+	parameters: TemplateMessageParameter[];
+};
+
+export type TemplateMessageComponent = RawTemplateMessageComponent | TemplateButtonComponent;
 
 export type TemplateMessageLanguage = {
 	/**
