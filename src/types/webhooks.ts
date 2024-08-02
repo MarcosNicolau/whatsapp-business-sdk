@@ -45,12 +45,14 @@ type SharedMessageTypes = Exclude<MessageType, "template">;
 
 /**
  * For more information about this object, go here https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components#messages-object
+ * Also take a look at the following examples docs, the above docs might not be up to date. 
+ * https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#received-messages
  */
 export type WebhookMessage = {
 	/**
 	 * The type of message that has been received by the business that has subscribed to Webhooks.
 	 */
-	type: SharedMessageTypes | "system" | "unknown" | "button" | "order";
+	type: SharedMessageTypes | "system" | "unknown" | "request_welcome" | "button" | "order";
 	/**
 	 * The time when the customer sent the message to the business in unix format
 	 */
