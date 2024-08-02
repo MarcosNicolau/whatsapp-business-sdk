@@ -41,7 +41,7 @@ export type WebhookMedia = {
 	id: string;
 };
 
-type SharedMessageTypes = Exclude<MessageType, "contacts" | "location" | "template" | "reaction">;
+type SharedMessageTypes = Exclude<MessageType, "template">;
 
 /**
  * For more information about this object, go here https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components#messages-object
