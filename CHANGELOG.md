@@ -1,3 +1,16 @@
+# [1.12.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.11.0...v1.12.0) (2024-08-03)
+
+
+### Bug Fixes
+
+* revert removal of "request_welcome" ([f9ec76c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f9ec76c97e35527c9a3b37d6fb5991f0e7d811d2))
+* Shared types ([dd79093](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/dd7909316a4cedbca9868dfa3690ff806528a5b8))
+
+
+### Features
+
+* **WebhooksTypes:** fix incorrect types ([068306f](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/068306f6da9fb02b43b86e53007ba58862ca4c5a))
+
 # [1.11.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.10.0...v1.11.0) (2024-07-29)
 
 
