@@ -229,50 +229,30 @@ export type WebhookMessage = {
 		| {
 				type: "nfm_reply";
 				/**
-				 * Sent when a user submits a flow (New Flow Message).
+				 * Sent when a user submits a flow.
 				 */
 				nfm_reply:
 					| {
-							/**
-							 * Indicates an address message flow.
-							 */
 							name: "address_message";
-							/**
-							 * Optional body text of the message.
-							 */
 							body?: string;
-							/**
-							 * JSON response containing the submitted data.
-							 */
-							response_json: unknown;
+							response_json: string;
 					  }
 					| {
 							/**
 							 * Indicates a general flow submission.
+							 * Documentation: https://developers.facebook.com/docs/whatsapp/flows/reference/responsemsgwebhook/
 							 */
 							name: "flow";
 							/**
 							 * Body text indicating the flow was sent.
 							 */
 							body: "Sent";
-							/**
-							 * JSON response containing the submitted data.
-							 */
-							response_json: unknown;
+							response_json: string;
 					  }
 					| {
-							/**
-							 * Optional name for other types of flows.
-							 */
 							name?: string;
-							/**
-							 * Optional body text of the message.
-							 */
 							body?: string;
-							/**
-							 * JSON response containing the submitted data.
-							 */
-							response_json: unknown;
+							response_json: string;
 					  };
 		  }
 	);
