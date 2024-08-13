@@ -45,8 +45,8 @@ type SharedMessageTypes = Exclude<MessageType, "template">;
 
 /**
  * For more information about this object, go here https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components#messages-object
- * 
- * Please also take a look at the examples for this object, because the docs for this object are not always up to date. 
+ *
+ * Please also take a look at the examples for this object, because the docs for this object are not always up to date.
  * You can find the examples for this object here https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/payload-examples#received-messages
  */
 export type WebhookMessage = {
@@ -182,40 +182,101 @@ export type WebhookMessage = {
 	 * */
 	image?: WebhookMedia;
 	/**
-	 * When a customer selected a button or list reply.
+	 * Included when a customer interacts with an interactive message (button, list, or flow).
 	 */
 	interactive?: {
-		type: string;
 		/**
-		 * Sent when a customer clicks a button
+		 * The type of interactive message that the customer replied to.
 		 */
-		button_reply?: {
-			/**
-			 *  Unique ID of a button
-			 */
-			id: string;
-			title: string;
-		};
-		/**
-		 *  Sent when a customer selects an item from a list
-		 */
-		list_reply?: {
-			/**
-			 * Unique ID of the selected list item
-			 */
-			id: string;
-			title: string;
-			description: string;
-		};
-		/**
-		 *  Sent when a user submits a flow
-		 */
-		nfm_reply?: {
-			body: string;
-			name: string;
-			response_json: string;
-		};
-	};
+		type: "button_reply" | "list_reply" | "nfm_reply";
+	} & (
+		| {
+				type: "button_reply";
+				/**
+				 * Sent when a customer clicks a button.
+				 */
+				button_reply: {
+					/**
+					 * Unique ID of the button.
+					 */
+					id: string;
+					/**
+					 * Title of the button.
+					 */
+					title: string;
+				};
+		  }
+		| {
+				type: "list_reply";
+				/**
+				 * Sent when a customer selects an item from a list.
+				 */
+				list_reply: {
+					/**
+					 * Unique ID of the selected list item.
+					 */
+					id: string;
+					/**
+					 * Title of the selected list item.
+					 */
+					title: string;
+					/**
+					 * Description of the selected list item.
+					 */
+					description: string;
+				};
+		  }
+		| {
+				type: "nfm_reply";
+				/**
+				 * Sent when a user submits a flow (New Flow Message).
+				 */
+				nfm_reply:
+					| {
+							/**
+							 * Indicates an address message flow.
+							 */
+							name: "address_message";
+							/**
+							 * Optional body text of the message.
+							 */
+							body?: string;
+							/**
+							 * JSON response containing the submitted data.
+							 */
+							response_json: unknown;
+					  }
+					| {
+							/**
+							 * Indicates a general flow submission.
+							 */
+							name: "flow";
+							/**
+							 * Body text indicating the flow was sent.
+							 */
+							body: "Sent";
+							/**
+							 * JSON response containing the submitted data.
+							 */
+							response_json: unknown;
+					  }
+					| {
+							/**
+							 * Optional name for other types of flows.
+							 */
+							name?: string;
+							/**
+							 * Optional body text of the message.
+							 */
+							body?: string;
+							/**
+							 * JSON response containing the submitted data.
+							 */
+							response_json: unknown;
+					  };
+		  }
+	);
+
 	/**
 	 * When the messages type field is set to location, this object is included in the messages object:
 	 */
