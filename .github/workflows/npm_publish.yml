@@ -49,5 +49,8 @@ jobs:
       - name: "Run build"
         run: yarn run build
       # Semantic release is configured to create a tag and publish the package to npm
-      - name: "Version and Npm publish"
-        run: npx semantic-release
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
