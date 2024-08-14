@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.12.0...v1.13.0) (2024-08-14)
+
+
+### Features
+
+* improvements type on interactive object ([68fba65](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/68fba653445c7baccb8eebcb53ca078eccf75fad))
+
 # [1.12.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.11.0...v1.12.0) (2024-08-03)
 
 
