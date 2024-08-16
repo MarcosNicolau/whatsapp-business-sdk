@@ -46,14 +46,14 @@ export type WebhookMedia = {
  * When the name is "flow", it indicates a general flow submission.
  * Documentation: https://developers.facebook.com/docs/whatsapp/flows/reference/responsemsgwebhook/
  */
-export type InteractiveWebhookMessageNfmReplyName =  'address_message' | 'flow' | 'Sent' | string;
+export type InteractiveWebhookMessageNfmReplyName =  "address_message" | "flow" | string;
 
 export type InteractiveWebhookMessageNfmReply<Name extends InteractiveWebhookMessageNfmReplyName = string> = {
-    name: Name;
+    name?: Name;
     response_json: string;
-} & Name extends 'Sent'
-    ? { body?: string }
-    : { body: string };
+} & Name extends "flow"
+    ? { body: "Sent" }
+    : { body?: string };
 
 export interface InteractiveWebhookMessageListReply {
     /**
