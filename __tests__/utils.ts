@@ -26,12 +26,9 @@ export const matchesWABAErrorObject = (err: any) =>
 export const expectDefaultResponse = (data: any) =>
 	expect(data).toEqual(expect.objectContaining<DefaultResponse>({ success: true }));
 
-//This object is a mock of the body that the webhook listener receives. It is used to testing the webhookHandler
-
-//This object is a mock of the body that the webhook listener receives. It is used to testing the webhookHandler
-
 const webhookError: WebhookError = { code: 2, title: "ERR", message: "ERR", error_data: { details: "" } };
 
+// This object is a mock of the body that the webhook listener receives. It is used for testing the webhookHandler
 export const webhookBodyFields: {
 	contact: WebhookContact;
 	textMessage: WebhookMessage;
@@ -59,7 +56,7 @@ export const webhookBodyFields: {
 		},
 	},
 	status: {
-		errors: [webhookError, webhookError],
+		errors: [webhookError],
 		conversation: {
 			id: "",
 			origin: {
