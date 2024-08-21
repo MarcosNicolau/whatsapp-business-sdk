@@ -1,3 +1,17 @@
+# [1.14.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.13.0...v1.14.0) (2024-08-21)
+
+
+### Bug Fixes
+
+* Comments and duplicate variable ([c47f2f1](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/c47f2f10538112832ed9b9b15a7053013927efb3))
+* **Webhooks:** InteractiveWebhookMessageNfmReply ([b222d00](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/b222d00c569999cb89150b9c9ba79c8128737d5f))
+* **Webhook:** Unit tests ([35ddc6c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/35ddc6cbc0a0cf181cd5f80752ff679621fc1c58))
+
+
+### Features
+
+* **Webhooks:** Improve interactive and status types ([dbd4bd9](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/dbd4bd98643338c2dc29dd6facaef3673be6b987))
+
 # [1.13.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.12.0...v1.13.0) (2024-08-14)
 
 
