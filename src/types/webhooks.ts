@@ -41,6 +41,67 @@ export type WebhookMedia = {
 	id: string;
 };
 
+
+/**
+ * When the name is "flow", it indicates a general flow submission.
+ * Documentation: https://developers.facebook.com/docs/whatsapp/flows/reference/responsemsgwebhook/
+ */
+export type InteractiveWebhookMessageNfmReplyName =  "address_message" | "flow" | string;
+
+export type InteractiveWebhookMessageNfmReply<Name extends InteractiveWebhookMessageNfmReplyName = string> = {
+    name?: Name;
+    response_json: string;
+} & Name extends "flow"
+    ? { body: "Sent" }
+    : { body?: string };
+
+export interface InteractiveWebhookMessageListReply {
+    /**
+     * Unique ID of the selected list item.
+     */
+    id: string;
+    /**
+     * Title of the selected list item.
+     */
+    title: string;
+    /**
+     * Description of the selected list item.
+     */
+    description: string;
+}
+
+export interface InteractiveWebhookMessageButtonReply {
+    /**
+     * Unique ID of the button.
+     */
+    id: string;
+    /**
+     * Title of the button.
+     */
+    title: string;
+}
+
+export type InteractiveWebhookMessageObjects =
+    | InteractiveWebhookMessageButtonReply
+    | InteractiveWebhookMessageListReply
+    | InteractiveWebhookMessageNfmReply;
+
+export type InteractiveWebhookMessageType = "button_reply" | "list_reply" | "nfm_reply";
+
+
+interface InteractiveWebhookMessagesMap
+    extends Record<InteractiveWebhookMessageType, InteractiveWebhookMessageObjects> {
+    button_reply: InteractiveWebhookMessageButtonReply;
+    list_reply: InteractiveWebhookMessageListReply;
+    nfm_reply: InteractiveWebhookMessageNfmReply;
+}
+
+export type InteractiveWebhookMessage<
+    Type extends InteractiveWebhookMessageType = InteractiveWebhookMessageType,
+> = Pick<InteractiveWebhookMessagesMap, Type> & { type: Type };
+
+
+
 type SharedMessageTypes = Exclude<MessageType, "template">;
 
 /**
@@ -184,79 +245,7 @@ export type WebhookMessage = {
 	/**
 	 * Included when a customer interacts with an interactive message (button, list, or flow).
 	 */
-	interactive?: {
-		/**
-		 * The type of interactive message that the customer replied to.
-		 */
-		type: "button_reply" | "list_reply" | "nfm_reply";
-	} & (
-		| {
-				type: "button_reply";
-				/**
-				 * Sent when a customer clicks a button.
-				 */
-				button_reply: {
-					/**
-					 * Unique ID of the button.
-					 */
-					id: string;
-					/**
-					 * Title of the button.
-					 */
-					title: string;
-				};
-		  }
-		| {
-				type: "list_reply";
-				/**
-				 * Sent when a customer selects an item from a list.
-				 */
-				list_reply: {
-					/**
-					 * Unique ID of the selected list item.
-					 */
-					id: string;
-					/**
-					 * Title of the selected list item.
-					 */
-					title: string;
-					/**
-					 * Description of the selected list item.
-					 */
-					description: string;
-				};
-		  }
-		| {
-				type: "nfm_reply";
-				/**
-				 * Sent when a user submits a flow.
-				 */
-				nfm_reply:
-					| {
-							name: "address_message";
-							body?: string;
-							response_json: string;
-					  }
-					| {
-							/**
-							 * Indicates a general flow submission.
-							 * Documentation: https://developers.facebook.com/docs/whatsapp/flows/reference/responsemsgwebhook/
-							 */
-							name: "flow";
-							/**
-							 * Body text indicating the flow was sent.
-							 */
-							body: "Sent";
-							response_json: string;
-					  }
-					| {
-							name?: string;
-							body?: string;
-							response_json: string;
-					  };
-		  }
-	);
-
+	interactive?: InteractiveWebhookMessage;
 	/**
 	 * When the messages type field is set to location, this object is included in the messages object:
 	 */
@@ -447,6 +436,8 @@ export type WebhookStatus = {
 	 * Date for the status message in unix
 	 */
 	timestamp: string;
+
+	errors: Array<WebhookError>;
 };
 
 export type WebhookMetadata = {
