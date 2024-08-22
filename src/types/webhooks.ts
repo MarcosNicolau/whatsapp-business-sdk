@@ -58,13 +58,12 @@ export type InteractiveWebhookMessageNfmReply<Name extends InteractiveWebhookMes
 	(
 		Name extends "flow" | "address_message"
 			? { name: Name }
-			: { name?: string }
+			: { name?: Name }
 	)
 	&
 	{
 		response_json: string;
 	}
-
 
 export interface InteractiveWebhookMessageListReply {
     /**
