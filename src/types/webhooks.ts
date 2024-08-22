@@ -48,12 +48,23 @@ export type WebhookMedia = {
  */
 export type InteractiveWebhookMessageNfmReplyName =  "address_message" | "flow" | string;
 
-export type InteractiveWebhookMessageNfmReply<Name extends InteractiveWebhookMessageNfmReplyName = string> = {
-    name?: Name;
-    response_json: string;
-} & Name extends "flow"
-    ? { body: "Sent" }
-    : { body?: string };
+export type InteractiveWebhookMessageNfmReply<Name extends InteractiveWebhookMessageNfmReplyName = string> =
+	(
+		Name extends "flow"
+    		? { body: "Sent" }
+    		: { body?: string }
+	)
+	&
+	(
+		Name extends "flow" | "address_message"
+			? { name: Name }
+			: { name?: string }
+	)
+	&
+	{
+		response_json: string;
+	}
+
 
 export interface InteractiveWebhookMessageListReply {
     /**
