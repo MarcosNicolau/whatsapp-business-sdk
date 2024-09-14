@@ -1,3 +1,11 @@
+## [1.14.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.14.0...v1.14.1) (2024-09-14)
+
+
+### Bug Fixes
+
+* **Webhooks:** InteractiveWebhookMessageNfmReply generics ([ad4eb3c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/ad4eb3cb0953accd6f6454a04c20992c03a88772))
+* **Webhooks:** Types for InteractiveWebhookMessageNfmReply ([f2fc3dd](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f2fc3dd9f73cd3b24c861ab2ae74fdbcac89770f))
+
 # [1.14.0](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.13.0...v1.14.0) (2024-08-21)
 
 
