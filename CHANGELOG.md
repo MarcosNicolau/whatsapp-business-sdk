@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.14.1...v1.14.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* Outdated template language codes ([f0f378c](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/f0f378c502566b0f9540313a7cd1e9397162bb68))
+
 ## [1.14.1](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.14.0...v1.14.1) (2024-09-14)
 
 
