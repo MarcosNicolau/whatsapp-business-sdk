@@ -77,7 +77,7 @@ export type Message = {
 	/**
 	 * Required when type=contacts
 	 */
-	contacts?: ContactMessage;
+	contacts?: ContactMessage[];
 	/**
 	 * Required when type=document
 	 */
