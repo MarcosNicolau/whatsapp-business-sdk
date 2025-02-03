@@ -1,3 +1,10 @@
+## [1.14.3](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.14.2...v1.14.3) (2025-02-03)
+
+
+### Bug Fixes
+
+* contacts message to be an array ([#62](https://github.com/MarcosNicolau/whatsapp-business-sdk/issues/62)) ([d2064d6](https://github.com/MarcosNicolau/whatsapp-business-sdk/commit/d2064d65edb4e6db2b46fcafe008db451dd287a9))
+
 ## [1.14.2](https://github.com/MarcosNicolau/whatsapp-business-sdk/compare/v1.14.1...v1.14.2) (2024-11-14)
 
 
