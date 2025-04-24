@@ -48,6 +48,7 @@ export class WABAClient {
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
+			// If no apiVersion is provided, defaults to v19.0
 			baseURL: `https://graph.facebook.com/${apiVersion || "v19.0"}`,
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
