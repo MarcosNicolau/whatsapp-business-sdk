@@ -28,6 +28,7 @@ import { createRestClient } from "./utils/restClient";
 
 interface WABAClientArgs {
 	apiToken: string;
+	apiVersion?: string;
 	phoneId: string;
 	accountId: string;
 }
@@ -42,12 +43,13 @@ export class WABAClient {
 	phoneId: string;
 	accountId: string;
 
-	constructor({ apiToken, phoneId, accountId }: WABAClientArgs) {
+	constructor({ apiToken, apiVersion, phoneId, accountId }: WABAClientArgs) {
 		this.phoneId = phoneId;
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
-			baseURL: "https://graph.facebook.com/v19.0",
+			// If no apiVersion is provided, defaults to v19.0
+			baseURL: `https://graph.facebook.com/${apiVersion || "v19.0"}`,
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}
