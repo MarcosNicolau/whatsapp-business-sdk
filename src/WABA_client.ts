@@ -43,12 +43,12 @@ export class WABAClient {
 	phoneId: string;
 	accountId: string;
 
-	constructor({ apiToken, apiVersion = "v19.0", phoneId, accountId }: WABAClientArgs) {
+	constructor({ apiToken, apiVersion, phoneId, accountId }: WABAClientArgs) {
 		this.phoneId = phoneId;
 		this.accountId = accountId;
 		this.restClient = createRestClient({
 			apiToken,
-			baseURL: `https://graph.facebook.com/${apiVersion}`,
+			baseURL: `https://graph.facebook.com/${apiVersion || "v19.0"}`,
 			errorHandler: (error) => WABAErrorHandler(error?.response?.data || error),
 		});
 	}
