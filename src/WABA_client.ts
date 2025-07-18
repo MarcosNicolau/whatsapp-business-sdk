@@ -175,6 +175,23 @@ export class WABAClient {
 			}
 		);
 	}
+	/**
+	 * Display a typing indicator so the WhatsApp user knows you are preparing a response. This is good practice if it will take you a few seconds to respond.
+	 *
+	 * The typing indicator will be dismissed once you respond, or after 25 seconds, whichever comes first. To prevent a poor user experience, only display a typing indicator if you are going to respond.
+	 *
+	 * Reference: https://developers.facebook.com/docs/whatsapp/cloud-api/typing-indicators/
+	 */
+	async markAsTyping(message_id: string) {
+		return this.restClient.post<DefaultResponse>(`${this.phoneId}/messages`, {
+			messaging_product: "whatsapp",
+			status: "read",
+			message_id,
+			typing_indicator: {
+				type: "text",
+			},
+		});
+	}
 	/*
 	 *
 	 *	PHONE NUMBERS ENDPOINTS (https://developers.facebook.com/docs/whatsapp/cloud-api/reference/phone-numbers)
